@@ -1,85 +1,87 @@
 <?php
 session_start();
 
-// Redirect if not logged in or not a farmer
+// حماية
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'farmer') {
     header("Location: ../pages/login.php");
     exit;
 }
 
-$farmer_id = $_SESSION['user_id'];
-$host = 'localhost';
-$db = 'GFLH';
-$dbuser = 'root';
-$pass = '';
+// DB
+$conn = new mysqli('localhost', 'root', '', 'GFLH');
 
-$conn = new mysqli($host, $dbuser, $pass, $db);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $farmer_id = $_SESSION['user_id'];
+
     $product_name = trim($_POST['product_name']);
     $description = trim($_POST['description']);
     $price = floatval($_POST['price']);
     $stock_quantity = intval($_POST['stock_quantity']);
     $delivery_option = isset($_POST['delivery_option']) ? 1 : 0;
     $pickup_option = isset($_POST['pickup_option']) ? 1 : 0;
+    $address = trim($_POST['address']);
 
-    // Validation
-    if (empty($product_name) || $price <= 0 || $stock_quantity < 0) {
+    // ✅ VALIDATION
+    if (
+        empty($product_name) ||
+        $price <= 0 ||
+        $stock_quantity < 0 ||
+        empty($address)
+    ) {
         header("Location: ../add-product.php?error=validation_failed");
         exit;
     }
 
-    // Handle image upload
+    // ✅ MUST SELECT ONE OPTION
+    if (!$delivery_option && !$pickup_option) {
+        header("Location: ../add-product.php?error=validation_failed");
+        exit;
+    }
+
+    // Image upload
     $image_path = null;
-    if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
-        $file = $_FILES['product_image'];
-        
-        // Validate file type
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        if (!in_array($file['type'], $allowed_types)) {
+
+    if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === 0) {
+
+        $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+        if (!in_array($_FILES['product_image']['type'], $allowed)) {
             header("Location: ../add-product.php?error=invalid_image_type");
             exit;
         }
 
-        // Validate file size (max 5MB)
-        if ($file['size'] > 5 * 1024 * 1024) {
+        if ($_FILES['product_image']['size'] > 5 * 1024 * 1024) {
             header("Location: ../add-product.php?error=image_too_large");
             exit;
         }
 
-        // Create uploads directory if it doesn't exist
-        $upload_dir = realpath(__DIR__ . '/../images/products/');
-        if (!$upload_dir) {
-            mkdir(__DIR__ . '/../images/products/', 0755, true);
-            $upload_dir = realpath(__DIR__ . '/../images/products/');
+        $dir = "../images/products/";
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
         }
 
-        // Generate unique filename
-        $filename = 'product_' . $farmer_id . '_' . time() . '_' . basename($file['name']);
-        $upload_path = $upload_dir . DIRECTORY_SEPARATOR . $filename;
+        $filename = time() . "_" . basename($_FILES['product_image']['name']);
+        $path = $dir . $filename;
 
-        // Move uploaded file
-        if (move_uploaded_file($file['tmp_name'], $upload_path)) {
-            $image_path = 'images/products/' . $filename;
-        } else {
-            header("Location: ../add-product.php?error=upload_failed");
-            exit;
+        if (move_uploaded_file($_FILES['product_image']['tmp_name'], $path)) {
+            $image_path = "images/products/" . $filename;
         }
     }
 
-    // Insert product into database
+    // Insert
     $stmt = $conn->prepare("
         INSERT INTO products 
-        (farmer_id, product_name, description, price, stock_quantity, image_path, delivery_option, pickup_option) 
-        VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?)
+        (farmer_id, product_name, description, price, stock_quantity, image_path, delivery_option, pickup_option, delivery_address)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
     $stmt->bind_param(
-        "issdisii",
+        "issdissis",
         $farmer_id,
         $product_name,
         $description,
@@ -87,21 +89,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stock_quantity,
         $image_path,
         $delivery_option,
-        $pickup_option
+        $pickup_option,
+        $address
     );
 
     if ($stmt->execute()) {
-        header("Location: ../pages/profile.php?success=product_added");
-        exit;
+        header("Location: ../pages/profile.php?success=1");
     } else {
         header("Location: ../add-product.php?error=database_error");
-        exit;
     }
 
     $stmt->close();
-} else {
-    header("Location: ../add-product.php");
-    exit;
 }
 
 $conn->close();

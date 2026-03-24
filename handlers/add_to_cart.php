@@ -10,6 +10,13 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $product_id = $_POST['product_id'];
 $quantity = (int)$_POST['quantity'];
+$delivery_method = $_POST['delivery_method'] ?? 'delivery';
+$delivery_address = $_POST['delivery_address'] ?? '';
+
+if ($delivery_method === 'delivery' && empty(trim($delivery_address))) {
+    header("Location: /GFLH/pages/products.php?error=delivery_address_required");
+    exit;
+}
 $customer_id = $_SESSION['user_id'];
 
 // Get product info including farmer_id
@@ -57,12 +64,14 @@ if ($existing) {
 
     $stmt = $pdo->prepare("
         UPDATE orders 
-        SET quantity = ?, total_price = ? 
+        SET quantity = ?, total_price = ?, delivery_method = ?, delivery_address = ? 
         WHERE shipment_id = ?
     ");
     $stmt->execute([
         $newQty,
         $product['price'] * $newQty,
+        $delivery_method,
+        $delivery_address,
         $existing['shipment_id']
     ]);
 
@@ -72,8 +81,8 @@ if ($existing) {
 
     $stmt = $pdo->prepare("
         INSERT INTO orders 
-        (order_id, customer_id, product_id, quantity, total_price, delivery_method, order_status) 
-        VALUES (?, ?, ?, ?, ?, 'delivery', 'basket')
+        (order_id, customer_id, product_id, quantity, total_price, delivery_method, delivery_address, order_status) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, 'basket')
     ");
 
     $stmt->execute([
@@ -81,7 +90,9 @@ if ($existing) {
         $customer_id,
         $product_id,
         $quantity,
-        $total_price
+        $total_price,
+        $delivery_method,
+        $delivery_address
     ]);
 }
 

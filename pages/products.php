@@ -73,6 +73,8 @@ $conn->close();
         <strong>Error:</strong> This is your own product.
       <?php elseif ($_GET['error'] === 'product_not_found'): ?>
         <strong>Error:</strong> The product you tried to add could not be found. It may have been removed.
+      <?php elseif ($_GET['error'] === 'delivery_address_required'): ?>
+        <strong>Error:</strong> Delivery address is required when selecting delivery.
       <?php else: ?>
         <strong>Error:</strong> An unknown error occurred.
       <?php endif; ?>
@@ -163,9 +165,6 @@ $conn->close();
 
                 <!-- ACTIONS -->
                 <div class="product-actions">
-                  <form method="POST" action="/GFLH/handlers/add_to_cart.php">
-  <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
-  
 <form method="POST" action="add_to_cart.php" class="cart-form">
   
   <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
@@ -178,6 +177,21 @@ $conn->close();
     max="<?php echo $product['stock_quantity']; ?>"
     class="quantity-input"
   >
+
+  <!-- DELIVERY METHOD -->
+  <div class="delivery-method">
+    <?php if ($product['delivery_option']): ?>
+      <label><input type="radio" name="delivery_method" value="delivery" checked> Delivery</label>
+    <?php endif; ?>
+    <?php if ($product['pickup_option']): ?>
+      <label><input type="radio" name="delivery_method" value="collection" <?php if (!$product['delivery_option']) echo 'checked'; ?>> Pickup</label>
+    <?php endif; ?>
+  </div>
+
+  <!-- DELIVERY ADDRESS -->
+  <div class="delivery-address" id="delivery-address-<?php echo $product['product_id']; ?>" style="display: none;">
+    <textarea name="delivery_address" placeholder="Enter delivery address" rows="3"></textarea>
+  </div>
 
   <button class="btn-add-cart"
     <?php if ($product['stock_quantity'] <= 0) echo 'disabled'; ?>>
@@ -230,6 +244,26 @@ function handleSortChange(value) {
   if (value === "") return;
   window.location.href = "?sort=" + value;
 }
+</script>
+
+<!-- DELIVERY SCRIPT -->
+<script>
+document.querySelectorAll('input[name="delivery_method"]').forEach(radio => {
+  radio.addEventListener('change', function() {
+    const productId = this.closest('form').querySelector('input[name="product_id"]').value;
+    const addressDiv = document.getElementById('delivery-address-' + productId);
+    if (this.value === 'delivery') {
+      addressDiv.style.display = 'block';
+    } else {
+      addressDiv.style.display = 'none';
+    }
+  });
+});
+
+// Trigger on load for checked ones
+document.querySelectorAll('input[name="delivery_method"]:checked').forEach(radio => {
+  radio.dispatchEvent(new Event('change'));
+});
 </script>
 
 </body>

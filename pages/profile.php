@@ -91,7 +91,166 @@ $stmt->close();
       <!-- FARMER SECTION: SALES DASHBOARD -->
       <section>
         <h2>Sales Dashboard</h2>
-        <p>Sales dashboard coming soon.</p>
+        
+        <?php
+        // Get sales statistics for the farmer
+        $sales_stmt = $conn->prepare("
+            SELECT 
+                SUM(o.total_price) as total_sales,
+                COUNT(DISTINCT o.shipment_id) as total_orders,
+                COUNT(DISTINCT o.customer_id) as total_customers
+            FROM orders o
+            JOIN products p ON o.product_id = p.product_id
+            WHERE p.farmer_id = ? AND o.order_status = 'completed'
+        ");
+        $sales_stmt->bind_param("i", $user_id);
+        $sales_stmt->execute();
+        $sales_stats = $sales_stmt->get_result()->fetch_assoc();
+        $sales_stmt->close();
+        
+        // Get sales by customer
+        $customer_sales_stmt = $conn->prepare("
+            SELECT 
+                u.username as customer_name,
+                u.email as customer_email,
+                SUM(o.total_price) as total_spent,
+                COUNT(DISTINCT o.shipment_id) as orders_count,
+                MAX(o.order_date) as last_order_date
+            FROM orders o
+            JOIN products p ON o.product_id = p.product_id
+            JOIN users u ON o.customer_id = u.user_id
+            WHERE p.farmer_id = ? AND o.order_status = 'completed'
+            GROUP BY o.customer_id, u.username, u.email
+            ORDER BY total_spent DESC
+        ");
+        $customer_sales_stmt->bind_param("i", $user_id);
+        $customer_sales_stmt->execute();
+        $customer_sales_result = $customer_sales_stmt->get_result();
+        $customer_sales = [];
+        while ($row = $customer_sales_result->fetch_assoc()) {
+            $customer_sales[] = $row;
+        }
+        $customer_sales_stmt->close();
+        
+        // Get recent orders
+        $recent_orders_stmt = $conn->prepare("
+            SELECT 
+                o.shipment_id,
+                o.order_date,
+                o.total_price,
+                o.quantity,
+                p.product_name,
+                u.username as customer_name
+            FROM orders o
+            JOIN products p ON o.product_id = p.product_id
+            JOIN users u ON o.customer_id = u.user_id
+            WHERE p.farmer_id = ? AND o.order_status = 'completed'
+            ORDER BY o.order_date DESC
+            LIMIT 10
+        ");
+        $recent_orders_stmt->bind_param("i", $user_id);
+        $recent_orders_stmt->execute();
+        $recent_orders_result = $recent_orders_stmt->get_result();
+        $recent_orders = [];
+        while ($row = $recent_orders_result->fetch_assoc()) {
+            $recent_orders[] = $row;
+        }
+        $recent_orders_stmt->close();
+        ?>
+        
+        <!-- Sales Summary -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+            <h3 style="margin: 0 0 10px 0; color: #16a34a;">Total Sales</h3>
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #16a34a;">
+              £<?php echo number_format($sales_stats['total_sales'] ?? 0, 2); ?>
+            </p>
+          </div>
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+            <h3 style="margin: 0 0 10px 0; color: #2563eb;">Total Orders</h3>
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #2563eb;">
+              <?php echo $sales_stats['total_orders'] ?? 0; ?>
+            </p>
+          </div>
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+            <h3 style="margin: 0 0 10px 0; color: #dc2626;">Customers</h3>
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #dc2626;">
+              <?php echo $sales_stats['total_customers'] ?? 0; ?>
+            </p>
+          </div>
+        </div>
+        
+        <!-- Sales by Customer -->
+        <?php if (!empty($customer_sales)): ?>
+        <div style="margin-bottom: 30px;">
+          <h3>Top Customers</h3>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+              <thead style="background: #f8f9fa;">
+                <tr>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Customer</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Email</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Orders</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Total Spent</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Last Order</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($customer_sales as $customer): ?>
+                <tr style="border-bottom: 1px solid #f8f9fa;">
+                  <td style="padding: 12px;"><?php echo htmlspecialchars($customer['customer_name']); ?></td>
+                  <td style="padding: 12px;"><?php echo htmlspecialchars($customer['customer_email']); ?></td>
+                  <td style="padding: 12px; text-align: right;"><?php echo $customer['orders_count']; ?></td>
+                  <td style="padding: 12px; text-align: right; font-weight: bold; color: #16a34a;">
+                    £<?php echo number_format($customer['total_spent'], 2); ?>
+                  </td>
+                  <td style="padding: 12px;"><?php echo date('M d, Y', strtotime($customer['last_order_date'])); ?></td>
+                </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <?php endif; ?>
+        
+        <!-- Recent Orders -->
+        <?php if (!empty($recent_orders)): ?>
+        <div>
+          <h3>Recent Sales</h3>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+              <thead style="background: #f8f9fa;">
+                <tr>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Date</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Product</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Customer</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Quantity</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($recent_orders as $order): ?>
+                <tr style="border-bottom: 1px solid #f8f9fa;">
+                  <td style="padding: 12px;"><?php echo date('M d, Y H:i', strtotime($order['order_date'])); ?></td>
+                  <td style="padding: 12px;"><?php echo htmlspecialchars($order['product_name']); ?></td>
+                  <td style="padding: 12px;"><?php echo htmlspecialchars($order['customer_name']); ?></td>
+                  <td style="padding: 12px; text-align: right;"><?php echo $order['quantity']; ?></td>
+                  <td style="padding: 12px; text-align: right; font-weight: bold; color: #16a34a;">
+                    £<?php echo number_format($order['total_price'], 2); ?>
+                  </td>
+                </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <?php else: ?>
+        <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 8px; margin-top: 20px;">
+          <h3 style="color: #666; margin-bottom: 10px;">No Sales Yet</h3>
+          <p style="color: #999; margin-bottom: 20px;">You haven't made any sales yet. Start by adding products to your store!</p>
+          <a href="/GFLH/handlers/add-product.php" style="display: inline-block; background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600;">Add Your First Product</a>
+        </div>
+        <?php endif; ?>
       </section>
 
     <?php elseif ($role === 'customer'): ?>
@@ -106,11 +265,7 @@ $stmt->close();
         </p>
       </section>
 
-      <!-- CUSTOMER SECTION: SAVED ITEMS -->
-      <section>
-        <h2>Favorite Farmers & Products</h2>
-        <p>No saved items yet.</p>
-      </section>
+
 
     <?php endif; ?>
 

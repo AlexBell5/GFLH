@@ -67,6 +67,18 @@ $conn->close();
 <?php include('../includes/navbar.php'); ?>
 
 <main>
+  <?php if (isset($_GET['error'])): ?>
+    <div style="background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 6px; margin: 20px auto; max-width: 1000px; border: 1px solid #fecaca;">
+      <?php if ($_GET['error'] === 'own_product'): ?>
+        <strong>Error:</strong> This is your own product.
+      <?php elseif ($_GET['error'] === 'product_not_found'): ?>
+        <strong>Error:</strong> The product you tried to add could not be found. It may have been removed.
+      <?php else: ?>
+        <strong>Error:</strong> An unknown error occurred.
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+
   <div class="products-section">
 
     <!-- HEADER -->

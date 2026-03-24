@@ -17,9 +17,10 @@ try {
 
     // Get all basket items for this customer
     $stmt = $pdo->prepare("
-        SELECT shipment_id, product_id, quantity 
-        FROM orders 
-        WHERE customer_id = ? AND order_status = 'basket'
+        SELECT o.shipment_id, o.product_id, o.quantity, p.farmer_id
+        FROM orders o
+        JOIN products p ON o.product_id = p.product_id
+        WHERE o.customer_id = ? AND o.order_status = 'basket'
     ");
     $stmt->execute([$customer_id]);
     $basket_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,6 +29,18 @@ try {
         $pdo->rollBack();
         header("Location: ../pages/cart.php?error=empty_cart");
         exit;
+    }
+
+    // Check if any items are from the customer's own farm (if they're a farmer)
+    $user_role = $_SESSION['role'] ?? '';
+    if ($user_role === 'farmer') {
+        foreach ($basket_items as $item) {
+            if ($item['farmer_id'] == $customer_id) {
+                $pdo->rollBack();
+                header("Location: ../pages/cart.php?error=own_product");
+                exit;
+            }
+        }
     }
 
     // Process each item

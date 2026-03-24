@@ -117,7 +117,7 @@ $username = $_SESSION['username'];
 
       <div class="form-actions">
         <button type="submit" class="btn btn-submit">Add Product</button>
-        <a href="./pages/profile.php" style="text-decoration: none;">
+        <a href="/GFLH/pages/profile.php" style="text-decoration: none;">
           <button type="button" class="btn btn-cancel">Cancel</button>
         </a>
       </div>

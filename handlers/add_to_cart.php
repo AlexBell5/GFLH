@@ -12,13 +12,20 @@ $product_id = $_POST['product_id'];
 $quantity = (int)$_POST['quantity'];
 $customer_id = $_SESSION['user_id'];
 
-// Get product info
-$stmt = $pdo->prepare("SELECT price, stock_quantity FROM products WHERE product_id = ?");
+// Get product info including farmer_id
+$stmt = $pdo->prepare("SELECT price, stock_quantity, farmer_id FROM products WHERE product_id = ?");
 $stmt->execute([$product_id]);
 $product = $stmt->fetch();
 
 if (!$product) {
-    die("Product not found");
+    header("Location: /GFLH/pages/products.php?error=product_not_found");
+    exit;
+}
+
+// Prevent farmers from buying their own products
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'farmer' && $product['farmer_id'] == $customer_id) {
+    header("Location: /GFLH/pages/products.php?error=own_product");
+    exit;
 }
 
 // ✅ VALIDATION

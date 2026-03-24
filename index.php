@@ -128,7 +128,7 @@ $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['
                     </div>
                     <div class="benefit-card">
                         <div class="benefit-icon">❤️</div>
-                        <h3>Support Community</h3>
+                        <h3>Support the Community</h3>
                         <p>Your money goes directly to local farmers and producers, strengthening our local economy.</p>
                     </div>
                     <div class="benefit-card">

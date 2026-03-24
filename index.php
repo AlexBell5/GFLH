@@ -91,16 +91,18 @@ $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GFLH - Greenfield Local Hub</title>
     <link rel="stylesheet" href="styles/navbar.css" />
     <link rel="stylesheet" href="styles/home.css" />
-   
+    <link rel="stylesheet" href="styles/dark-mode.css">
+
 </head>
 <body>
     <?php include('includes/navbar.php'); ?>
-    
+    <script src="scripts/settings.js"></script>
     <main>
         <!-- Hero Section -->
         <section class="hero">
@@ -231,5 +233,6 @@ $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['
             <p>&copy; 2026 Good Local Hub. All rights reserved.</p>
         </div>
     </footer>
+    
 </body>
 </html>

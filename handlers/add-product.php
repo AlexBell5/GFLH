@@ -29,6 +29,7 @@ if ($row = $result->fetch_assoc()) {
 <head>
   <meta charset="UTF-8">
   <title>Add Product</title>
+  <link rel="stylesheet" href="../styles/add-products.css" />
 </head>
 <body>
 

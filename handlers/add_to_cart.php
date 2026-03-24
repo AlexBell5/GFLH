@@ -11,12 +11,10 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $product_id = $_POST['product_id'];
 $quantity = (int)$_POST['quantity'];
 $delivery_method = $_POST['delivery_method'] ?? 'delivery';
-$delivery_address = $_POST['delivery_address'] ?? '';
 
-if ($delivery_method === 'delivery' && empty(trim($delivery_address))) {
-    header("Location: /GFLH/pages/products.php?error=delivery_address_required");
-    exit;
-}
+// Make delivery address optional
+$delivery_address = $_POST['delivery_address'] ?? null; // allow NULL
+
 $customer_id = $_SESSION['user_id'];
 
 // Get product info including farmer_id
@@ -37,9 +35,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'farmer' && $product['farm
 
 // ✅ VALIDATION
 if ($quantity < 1) $quantity = 1;
-
 if ($quantity > $product['stock_quantity']) {
-    $quantity = $product['stock_quantity']; // prevent overflow
+    $quantity = $product['stock_quantity'];
 }
 
 $total_price = $product['price'] * $quantity;
@@ -71,12 +68,12 @@ if ($existing) {
         $newQty,
         $product['price'] * $newQty,
         $delivery_method,
-        $delivery_address,
+        $delivery_address, // can be NULL now
         $existing['shipment_id']
     ]);
 
 } else {
-    // Generate unique order ID using crc32 to avoid collisions
+    // Generate unique order ID
     $order_id = abs(crc32(uniqid() . mt_rand()));
 
     $stmt = $pdo->prepare("
@@ -92,7 +89,7 @@ if ($existing) {
         $quantity,
         $total_price,
         $delivery_method,
-        $delivery_address
+        $delivery_address // can be NULL
     ]);
 }
 

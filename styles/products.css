@@ -300,9 +300,6 @@ body.dark .products-controls input::placeholder {
     color: #9ca3af;
 }
 
-body.dark .products-grid {
-    /* optional: keep spacing same, colors handled in cards */
-}
 
 body.dark .product-card {
     background-color: #1f1f1f;

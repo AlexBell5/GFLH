@@ -20,24 +20,127 @@
     transition: left 0.2s;
 }
 
-/* Dark mode theme for page */
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
 body.dark {
     background-color: #121212;
     color: #f1f1f1;
 }
 
-/* Optional: dark mode for other elements */
-body.dark #screen-reader-container,
-body.dark .settings-option {
+/* Main Container */
+#screen-reader-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark #screen-reader-container {
     background-color: #1f1f1f;
     color: #f1f1f1;
 }
-/* Move slider when dark mode is active */
-body.dark .toggle-slider {
-    left: 26px;
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
-/* Optional: change background when active */
-body.dark .toggle-switch {
-    background-color: #4caf50;
+.setting-group {
+    margin-bottom: 25px;
+}
+
+.setting-group h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.setting-group label {
+    display: block;
+    margin: 8px 0;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#toggle-reader, #increase-text, #decrease-text {
+    background-color: #16a34a;
+    color: #fff;
+}
+
+#toggle-reader:hover,
+#increase-text:hover,
+#decrease-text:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.2);
+}
+
+body.dark #toggle-reader,
+body.dark #increase-text,
+body.dark #decrease-text {
+    background-color: #16a34a;
+}
+
+/* Inputs */
+input[type="range"], select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+body.dark input[type="range"],
+body.dark select {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #f1f1f1;
+}
+
+/* Checkbox & Radio */
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* High Contrast Mode */
+body.high-contrast {
+    background-color: black;
+    color: yellow;
+}
+
+body.high-contrast a { color: cyan; }
+body.high-contrast button { background-color: yellow; color: black; }
+
+/* Reduce Motion */
+body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Focus Outline for Accessibility */
+button:focus, input:focus, select:focus {
+    outline: 3px solid #16a34a;
+    outline-offset: 2px;
 }

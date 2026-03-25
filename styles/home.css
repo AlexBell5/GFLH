@@ -630,3 +630,8 @@ body.dark .section-title * {
 body.dark .benefit-card * {
     color: #f1f1f1;
 }
+
+body.dark .product-name,
+body.dark .product-farm{
+    color: #f1f1f1;
+}

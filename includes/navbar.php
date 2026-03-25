@@ -22,7 +22,6 @@ $is_logged_in = isset($_SESSION['user_id']);
             <a href="/GFLH/index.php" class="nav-link">Home</a>
             <a href="/GFLH/pages/products.php" class="nav-link">Products</a>
             <a href="/GFLH/pages/producers.php" class="nav-link">Producers</a>
-            <a href="/GFLH/pages/about.php" class="nav-link">About</a>
             <a href="/GFLH/pages/settings.php" class="nav-link">Settings</a>
         </div>
 

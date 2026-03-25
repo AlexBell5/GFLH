@@ -15,25 +15,82 @@
     <h1>Our Producers</h1>
     <p>Meet the local farmers, artisans, and producers who make GLH possible. Each one is committed to sustainable, ethical practices and delivering the highest quality products.</p>
 
-    <!-- Producer Card -->
-    <div class="producer-card">
-        <div class="producer-info">
-            <h2>Green Valley Farm</h2>
-            <p class="producer-meta">
-                <span>📍 Millbrook, 5 miles from GLH</span> | 
-                <span>📅 Est. 1987</span>
-            </p>
-            <p>Family-run organic farm specializing in seasonal vegetables and free-range eggs. We practice regenerative agriculture and never use synthetic pesticides.</p>
-            <div class="methods">
-                <span>Organic</span>
-                <span>Regenerative Agriculture</span>
-                <span>No Pesticides</span>
-            </div>
-            <div class="buttons">
-                <button class="btn-primary" onclick="window.location.href='products.php'" >View Products</button>
-            </div>
+<!-- Producer Cards -->
+<div class="producer-card">
+    <div class="producer-info">
+        <h2>Green Valley Farm</h2>
+        <p class="producer-meta">
+            <span>📍 Millbrook, 5 miles from GLH</span> | 
+            <span>📅 Est. 1987</span>
+        </p>
+        <p>Family-run organic farm specializing in seasonal vegetables and free-range eggs. We practice regenerative agriculture and never use synthetic pesticides.</p>
+        <div class="methods">
+            <span>Organic</span>
+            <span>Regenerative Agriculture</span>
+            <span>No Pesticides</span>
+        </div>
+        <div class="buttons">
+            <button class="btn-primary" onclick="window.location.href='products.php'">View Products</button>
         </div>
     </div>
+</div>
+
+<div class="producer-card">
+    <div class="producer-info">
+        <h2>Sunrise Dairy</h2>
+        <p class="producer-meta">
+            <span>📍 Brookfield, 8 miles from GLH</span> | 
+            <span>📅 Est. 1995</span>
+        </p>
+        <p>Small family-owned dairy producing organic milk, cheese, and yogurt. Focused on animal welfare and environmentally friendly practices.</p>
+        <div class="methods">
+            <span>Organic</span>
+            <span>Free-Range</span>
+            <span>Grass-Fed</span>
+        </div>
+        <div class="buttons">
+            <button class="btn-primary" onclick="window.location.href='products.php'">View Products</button>
+        </div>
+    </div>
+</div>
+
+<div class="producer-card">
+    <div class="producer-info">
+        <h2>Maplewood Honey</h2>
+        <p class="producer-meta">
+            <span>📍 Pinecrest, 12 miles from GLH</span> | 
+            <span>📅 Est. 2002</span>
+        </p>
+        <p>Artisanal honey producer using sustainable beekeeping methods. Produces a variety of natural honeys and beeswax products.</p>
+        <div class="methods">
+            <span>Sustainable Beekeeping</span>
+            <span>Raw Honey</span>
+            <span>Local</span>
+        </div>
+        <div class="buttons">
+            <button class="btn-primary" onclick="window.location.href='products.php'">View Products</button>
+        </div>
+    </div>
+</div>
+
+<div class="producer-card">
+    <div class="producer-info">
+        <h2>Willow Creek Bakery</h2>
+        <p class="producer-meta">
+            <span>📍 Rivertown, 7 miles from GLH</span> | 
+            <span>📅 Est. 2010</span>
+        </p>
+        <p>Artisan bakery specializing in sourdough breads, pastries, and gluten-free options. Uses local ingredients and seasonal produce.</p>
+        <div class="methods">
+            <span>Artisan</span>
+            <span>Local Ingredients</span>
+            <span>Seasonal</span>
+        </div>
+        <div class="buttons">
+            <button class="btn-primary" onclick="window.location.href='products.php'">View Products</button>
+        </div>
+    </div>
+</div>
 
     <!-- Why Work With Local Producers -->
     <div class="benefits">

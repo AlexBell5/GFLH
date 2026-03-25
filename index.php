@@ -3,6 +3,7 @@ session_start();
 $host = "localhost";
 $user = "root";
 $pass = "";
+$dbname = "GFLH";
 
 try {
     // Connect without database first
@@ -87,7 +88,88 @@ $farmerCount = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'fa
 $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['count'];
 
 ?>
+<?php
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // --- Add Producers (farmers) ---
+    $farmers = [
+        ['username' => 'Green Valley Farm', 'email' => 'greenvalley@example.com', 'password' => password_hash('password123', PASSWORD_DEFAULT)],
+        ['username' => 'Sunrise Dairy', 'email' => 'sunrisedairy@example.com', 'password' => password_hash('password123', PASSWORD_DEFAULT)],
+        ['username' => 'Maplewood Honey', 'email' => 'maplewood@example.com', 'password' => password_hash('password123', PASSWORD_DEFAULT)],
+        ['username' => 'Willow Creek Bakery', 'email' => 'willowcreek@example.com', 'password' => password_hash('password123', PASSWORD_DEFAULT)],
+    ];
+
+    $insertFarmer = $pdo->prepare("INSERT INTO users (username, email, password_hash, role) VALUES (:username, :email, :password, 'farmer')");
+    $getFarmer = $pdo->prepare("SELECT user_id FROM users WHERE email = :email");
+
+    foreach ($farmers as $farmer) {
+        // Check if farmer already exists
+        $getFarmer->execute([':email' => $farmer['email']]);
+        if (!$getFarmer->fetchColumn()) {
+            $insertFarmer->execute([
+                ':username' => $farmer['username'],
+                ':email' => $farmer['email'],
+                ':password' => $farmer['password'],
+            ]);
+        }
+    }
+
+    // --- Add Products ---
+    $products = [
+        // Green Valley Farm
+        ['farmer_email' => 'greenvalley@example.com', 'product_name' => 'Tomatoes', 'price' => 2.50, 'stock_quantity' => 50],
+        ['farmer_email' => 'greenvalley@example.com', 'product_name' => 'Carrots', 'price' => 1.80, 'stock_quantity' => 60],
+        ['farmer_email' => 'greenvalley@example.com', 'product_name' => 'Free-range Eggs', 'price' => 3.20, 'stock_quantity' => 40],
+
+        // Sunrise Dairy
+        ['farmer_email' => 'sunrisedairy@example.com', 'product_name' => 'Milk', 'price' => 1.50, 'stock_quantity' => 100],
+        ['farmer_email' => 'sunrisedairy@example.com', 'product_name' => 'Cheese', 'price' => 4.50, 'stock_quantity' => 30],
+        ['farmer_email' => 'sunrisedairy@example.com', 'product_name' => 'Yogurt', 'price' => 2.00, 'stock_quantity' => 50],
+
+        // Maplewood Honey
+        ['farmer_email' => 'maplewood@example.com', 'product_name' => 'Raw Honey', 'price' => 6.00, 'stock_quantity' => 25],
+        ['farmer_email' => 'maplewood@example.com', 'product_name' => 'Beeswax Candles', 'price' => 5.00, 'stock_quantity' => 20],
+
+        // Willow Creek Bakery
+        ['farmer_email' => 'willowcreek@example.com', 'product_name' => 'Sourdough Bread', 'price' => 3.00, 'stock_quantity' => 40],
+        ['farmer_email' => 'willowcreek@example.com', 'product_name' => 'Gluten-free Muffins', 'price' => 2.50, 'stock_quantity' => 35],
+        ['farmer_email' => 'willowcreek@example.com', 'product_name' => 'Croissants', 'price' => 2.00, 'stock_quantity' => 30],
+    ];
+
+    $getFarmerId = $pdo->prepare("SELECT user_id FROM users WHERE email = :email");
+    $getProduct = $pdo->prepare("SELECT product_id FROM products WHERE product_name = :product_name AND farmer_id = :farmer_id");
+    $insertProduct = $pdo->prepare("
+        INSERT INTO products (farmer_id, product_name, price, stock_quantity)
+        VALUES (:farmer_id, :product_name, :price, :stock_quantity)
+    ");
+
+    foreach ($products as $product) {
+        $getFarmerId->execute([':email' => $product['farmer_email']]);
+        $farmerId = $getFarmerId->fetchColumn();
+        if ($farmerId) {
+            // Check if product already exists for this farmer
+            $getProduct->execute([
+                ':product_name' => $product['product_name'],
+                ':farmer_id' => $farmerId
+            ]);
+            if (!$getProduct->fetchColumn()) {
+                $insertProduct->execute([
+                    ':farmer_id' => $farmerId,
+                    ':product_name' => $product['product_name'],
+                    ':price' => $product['price'],
+                    ':stock_quantity' => $product['stock_quantity'],
+                ]);
+            }
+        }
+    }
+
+
+} catch (PDOException $e) {
+    die("Database seeding failed: " . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -210,8 +292,8 @@ $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['
             <div>
                 <div class="footer-logo">
                     <div class="footer-logo-text">
-                        <span class="footer-logo-main">GLH</span>
-                        <span class="footer-logo-sub">Good Local Hub</span>
+                        <span class="footer-logo-main">GFLH</span>
+                        <span class="footer-logo-sub">Greenfield Local Hub</span>
                     </div>
                 </div>
                 <p class="footer-text">Supporting local farmers and food producers. Fresh, sustainable, and transparent.</p>
@@ -229,7 +311,7 @@ $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['
             </div>
         </div>
         <div class="footer-divider">
-            <p>&copy; 2026 Good Local Hub. All rights reserved.</p>
+            <p>&copy; 2026 Greenfield Local Hub. All rights reserved.</p>
         </div>
     </footer>
     

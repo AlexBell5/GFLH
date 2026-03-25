@@ -253,11 +253,7 @@ $stmt->close();
         </div>
         <?php endif; ?>
       </section>
-
-    <?php elseif ($role === 'customer'): ?>
-      <!-- CUSTOMER-SPECIFIC CONTENT -->
-
-      <!-- CUSTOMER SECTION: YOUR ORDERS -->
+<?php endif; ?>
       <section>
         <h2>Your Orders</h2>
         <p>
@@ -267,8 +263,6 @@ $stmt->close();
       </section>
 
 
-
-    <?php endif; ?>
 
     <!-- COMMON SECTION: EDIT PROFILE -->
     <section id="editProfileSection" style="display:none;">

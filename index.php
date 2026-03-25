@@ -97,7 +97,6 @@ $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['
     <title>GFLH - Greenfield Local Hub</title>
     <link rel="stylesheet" href="styles/navbar.css" />
     <link rel="stylesheet" href="styles/home.css" />
-    <link rel="stylesheet" href="styles/dark-mode.css">
 
 </head>
 <body>

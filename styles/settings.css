@@ -21,14 +21,23 @@
 }
 
 /* Dark mode theme for page */
-body.dark-mode {
+body.dark {
     background-color: #121212;
     color: #f1f1f1;
 }
 
 /* Optional: dark mode for other elements */
-body.dark-mode #screen-reader-container,
-body.dark-mode .settings-option {
+body.dark #screen-reader-container,
+body.dark .settings-option {
     background-color: #1f1f1f;
     color: #f1f1f1;
+}
+/* Move slider when dark mode is active */
+body.dark .toggle-slider {
+    left: 26px;
+}
+
+/* Optional: change background when active */
+body.dark .toggle-switch {
+    background-color: #4caf50;
 }

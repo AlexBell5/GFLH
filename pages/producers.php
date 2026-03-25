@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../styles/navbar.css" />
 </head>
 <body>
+  <script src="../scripts/settings.js"></script>
 <?php include('../includes/navbar.php'); ?>
 <main>
   <h1>Producers</h1>

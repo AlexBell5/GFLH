@@ -27,6 +27,10 @@ if ($row = $result->fetch_assoc()) {
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="../styles/navbar.css" />
+   <script src="../scripts/settings.js"></script>
+  <?php include('../includes/navbar.php'); ?>
+  <script src="../scripts/settings.js"></script>
   <meta charset="UTF-8">
   <title>Add Product</title>
   <link rel="stylesheet" href="../styles/add-products.css" />

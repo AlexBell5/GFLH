@@ -65,7 +65,7 @@ $conn->close();
 <body>
 
 <?php include('../includes/navbar.php'); ?>
-
+<script src="../scripts/settings.js"></script>
 <main>
   <?php if (isset($_GET['error'])): ?>
     <div style="background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 6px; margin: 20px auto; max-width: 1000px; border: 1px solid #fecaca;">

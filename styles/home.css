@@ -489,3 +489,131 @@
             }
         }
     
+        body.dark {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+/* Hero Section */
+body.dark .hero {
+    background: linear-gradient(135deg, #0f4d2d 0%, #0b3922 100%);
+    color: #f1f1f1;
+}
+
+/* Buttons */
+body.dark .btn-primary {
+    background-color: #16a34a;
+    color: white;
+}
+
+body.dark .btn-primary:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+body.dark .btn-secondary {
+    color: #f1f1f1;
+    border-color: #4caf50;
+}
+
+body.dark .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Why Buy Local Section */
+body.dark .why-buy-section {
+    background-color: #1f1f1f;
+}
+
+body.dark .benefit-card {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #f1f1f1;
+}
+
+body.dark .benefit-card p {
+    color: #ccc;
+}
+
+body.dark .benefit-icon {
+    background: linear-gradient(135deg, #1e3f2e 0%, #265b3f 100%);
+}
+
+/* Featured Products Section */
+body.dark .featured-section {
+    background-color: #121212;
+}
+
+body.dark .product-card {
+    background-color: #1f1f1f;
+    border: 1px solid #444;
+    color: #f1f1f1;
+}
+
+body.dark .product-info,
+body.dark .product-price,
+body.dark .product-quantity,
+body.dark .product-farm {
+    color: #f1f1f1;
+}
+
+body.dark .product-image {
+    background: linear-gradient(135deg, #2a2a2a 0%, #3b3b3b 100%);
+}
+
+/* Stats Section */
+body.dark .stats-section {
+    background: linear-gradient(135deg, #0f4d2d 0%, #0b3922 100%);
+    color: #f1f1f1;
+}
+
+body.dark .stat-item p {
+    opacity: 0.9;
+}
+
+/* CTA Section */
+body.dark .cta-section {
+    background-color: #1f1f1f;
+    color: #f1f1f1;
+}
+
+body.dark .cta-btn-primary {
+    background-color: #16a34a;
+    color: white;
+}
+
+body.dark .cta-btn-secondary {
+    background-color: #2a2a2a;
+    color: #f1f1f1;
+    border-color: #444;
+}
+
+body.dark .cta-btn-secondary:hover {
+    color: #16a34a;
+    border-color: #16a34a;
+}
+
+/* Footer */
+body.dark footer {
+    background: #0f1419;
+    color: #cbd5e1;
+}
+
+body.dark .footer-link,
+body.dark .contact-info,
+body.dark .footer-text {
+    color: #cbd5e1;
+}
+
+body.dark .footer-link:hover {
+    color: #16a34a;
+}
+
+body.dark .footer-divider {
+    color: #6b7280;
+    border-top: 1px solid #374151;
+}
+
+/* Optional smooth transitions */
+body, .hero, .benefit-card, .product-card, .cta-section, footer {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}

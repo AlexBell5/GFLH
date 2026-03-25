@@ -36,12 +36,7 @@ if ($conn->connect_error) {
     </label>
 </div>
 
-<div class="settings-option" data-setting="dark-mode">
-    <div class="toggle-switch" id="dark-mode-toggle">
-        <div class="toggle-slider"></div>
-    </div>
-</div>
-            
-    <script src="../scripts/settings.js"></script>
+
+<script src="../scripts/settings.js"></script>
 </body>
 </html>

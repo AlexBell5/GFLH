@@ -112,3 +112,48 @@ p[style*="color:red"] {
         margin-bottom: 10px;
     }
 }
+/* =========================
+   DARK MODE OVERRIDES
+   ========================= */
+
+body.dark {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.dark form {
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+body.dark input[type="text"],
+body.dark input[type="number"],
+body.dark input[type="file"],
+body.dark textarea {
+    background-color: #2a2a2a;
+    color: #f1f1f1;
+    border: 1px solid #444;
+}
+
+body.dark input:focus,
+body.dark textarea:focus {
+    border-color: #16a34a;
+}
+
+body.dark label {
+    color: #f1f1f1;
+}
+
+body.dark button[type="submit"] {
+    background-color: #16a34a;
+    color: #ffffff;
+}
+
+body.dark button[type="submit"]:hover {
+    background-color: #15803d;
+}
+
+body.dark p[style*="color:red"] {
+    background: #5a1e1e;
+    color: #ffb3b3;
+}

@@ -44,12 +44,16 @@ $is_logged_in = isset($_SESSION['user_id']);
             <?php else: ?>
                 <a href="/GFLH/pages/login.php" class="btn-login">Login</a>
             <?php endif; ?>
+                <a>Dark Mode</a>
+            <div class="toggle-switch" id="toggle">
+    <div class="toggle-slider"></div>
+</div>
         </div>
     </div>
 </nav>
 
 <?php if ($is_logged_in): ?>
-<div id="cartSidebar" class="cart-sidebar" style="right: -400px;">
+<div id="cartSidebar" class="cart-sidebar">
     <div class="cart-header">
         <h2>Your Basket</h2>
         <button id="closeCart">✖</button>
@@ -126,3 +130,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
+

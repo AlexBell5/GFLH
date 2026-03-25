@@ -277,3 +277,109 @@
   border-color: #16a34a;
   box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
 }
+/* DARK MODE */
+body.dark .products-section {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.dark .products-header h1,
+body.dark .products-header p {
+    color: #f1f1f1;
+}
+
+body.dark .products-controls input,
+body.dark .products-controls select,
+body.dark .btn-filter {
+    background-color: #1f1f1f;
+    color: #f1f1f1;
+    border-color: #333;
+}
+
+body.dark .products-controls input::placeholder {
+    color: #9ca3af;
+}
+
+body.dark .products-grid {
+    /* optional: keep spacing same, colors handled in cards */
+}
+
+body.dark .product-card {
+    background-color: #1f1f1f;
+    border-color: #333;
+}
+
+body.dark .product-card:hover {
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+}
+
+body.dark .product-image {
+    background-color: #2c2c2c;
+}
+
+body.dark .product-image-placeholder {
+    background: linear-gradient(135deg, #4caf50, #1b5e20);
+    color: #ffffff;
+}
+
+body.dark .product-name,
+body.dark .product-farmer,
+body.dark .product-description,
+body.dark .product-stock,
+body.dark .product-price {
+    color: #f1f1f1;
+}
+
+body.dark .product-stock {
+    background-color: #2c2c2c;
+    color: #9ca3af;
+}
+
+body.dark .option-badge {
+    background-color: #2e7d32;
+    color: #e8f5e9;
+    border-color: #4caf50;
+}
+
+body.dark .btn-add-cart {
+    background-color: #16a34a;
+    color: #ffffff;
+}
+
+body.dark .btn-add-cart:hover {
+    background-color: #138032;
+}
+
+body.dark .btn-add-cart:disabled {
+    background-color: #555;
+    color: #ccc;
+}
+
+body.dark .btn-view-details {
+    background-color: #1f1f1f;
+    border-color: #333;
+    color: #f1f1f1;
+}
+
+body.dark .btn-view-details:hover {
+    background-color: #2c2c2c;
+}
+
+body.dark .no-products {
+    color: #9ca3af;
+}
+
+body.dark .no-products h2 {
+    color: #f1f1f1;
+}
+
+body.dark .quantity-input {
+    background-color: #1f1f1f;
+    color: #f1f1f1;
+    border-color: #333;
+}
+
+body.dark .quantity-input:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.3);
+}

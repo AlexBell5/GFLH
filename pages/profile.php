@@ -35,6 +35,7 @@ $stmt->close();
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="../scripts/settings.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><?php echo ucfirst($role); ?> Profile - GFLH</title>
@@ -160,19 +161,19 @@ $stmt->close();
         
         <!-- Sales Summary -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+          <div>
             <h3 style="margin: 0 0 10px 0; color: #16a34a;">Total Sales</h3>
             <p style="font-size: 24px; font-weight: bold; margin: 0; color: #16a34a;">
               £<?php echo number_format($sales_stats['total_sales'] ?? 0, 2); ?>
             </p>
           </div>
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+          <div>
             <h3 style="margin: 0 0 10px 0; color: #2563eb;">Total Orders</h3>
             <p style="font-size: 24px; font-weight: bold; margin: 0; color: #2563eb;">
               <?php echo $sales_stats['total_orders'] ?? 0; ?>
             </p>
           </div>
-          <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: center;">
+          <div>
             <h3 style="margin: 0 0 10px 0; color: #dc2626;">Customers</h3>
             <p style="font-size: 24px; font-weight: bold; margin: 0; color: #dc2626;">
               <?php echo $sales_stats['total_customers'] ?? 0; ?>

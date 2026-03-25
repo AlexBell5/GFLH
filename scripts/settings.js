@@ -1,141 +1,116 @@
-// settings.js
-class SimpleScreenReader {
-    constructor() {
-        this.isActive = this.loadSetting('isActive', false);
-        this.synth = window.speechSynthesis;
-        this.voices = [];
-        this.currentVoice = null;
-        this.rate = this.loadSetting('rate', 1);
+// Only define if not already defined
+if (!window.SimpleScreenReader) {
 
-        this.init();
-    }
+    window.SimpleScreenReader = class {
+        constructor() {
+            this.isActive = this.loadSetting('isActive', false);
+            this.rate = this.loadSetting('rate', 1);
+            this.voices = [];
+            this.currentVoice = null;
+            this.synth = window.speechSynthesis;
 
-    // Load a setting from localStorage
-    loadSetting(key, defaultValue) {
-        try {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.loadVoices();
+                this.setupControls();
+                this.updateUIFromSettings();
+                this.initDarkModeToggle();
+            });
+
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = () => this.loadVoices();
+            }
+        }
+
+        loadSetting(key, defaultValue) {
             const saved = localStorage.getItem(`screenReader_${key}`);
             if (saved !== null) {
                 if (saved === 'true') return true;
                 if (saved === 'false') return false;
                 const num = parseFloat(saved);
-                if (!isNaN(num)) return num;
-                return saved;
+                return isNaN(num) ? saved : num;
             }
-        } catch (e) { console.error(e); }
-        return defaultValue;
-    }
+            return defaultValue;
+        }
 
-    // Save a setting to localStorage
-    saveSetting(key, value) {
-        try {
+        saveSetting(key, value) {
             localStorage.setItem(`screenReader_${key}`, value);
-        } catch (e) { console.error(e); }
-    }
-
-    init() {
-        this.loadVoices();
-        this.setupControls();
-        this.updateUIFromSettings();
-        this.initDarkModeToggle();
-
-        if (speechSynthesis.onvoiceschanged !== undefined) {
-            speechSynthesis.onvoiceschanged = () => this.loadVoices();
         }
-    }
 
-    loadVoices() {
-        this.voices = this.synth.getVoices();
-        if (this.voices.length > 0) {
-            this.currentVoice = this.voices[0];
+        loadVoices() {
+            this.voices = this.synth.getVoices();
             const voiceSelect = document.getElementById('voice-select');
-            if (voiceSelect) {
-                voiceSelect.innerHTML = '';
-                this.voices.forEach((voice, index) => {
-                    const option = document.createElement('option');
-                    option.value = index;
-                    option.textContent = voice.name + (voice.default ? " (default)" : "");
-                    voiceSelect.appendChild(option);
+            if (!voiceSelect || this.voices.length === 0) return;
+
+            voiceSelect.innerHTML = '';
+            this.voices.forEach((voice, idx) => {
+                const option = document.createElement('option');
+                option.value = idx;
+                option.textContent = voice.name + (voice.default ? ' (default)' : '');
+                voiceSelect.appendChild(option);
+            });
+
+            const savedVoiceIndex = this.loadSetting('voiceIndex', 0);
+            voiceSelect.value = savedVoiceIndex;
+            this.currentVoice = this.voices[savedVoiceIndex];
+        }
+
+        setupControls() {
+            const toggleBtn = document.getElementById('toggle-reader');
+            if (toggleBtn) toggleBtn.addEventListener('click', () => this.toggleReader());
+
+            const speedControl = document.getElementById('speed-control');
+            if (speedControl) {
+                speedControl.value = this.rate;
+                speedControl.addEventListener('input', e => {
+                    this.rate = parseFloat(e.target.value);
+                    this.saveSetting('rate', this.rate);
                 });
-
-                const savedVoiceIndex = this.loadSetting('voiceIndex', 0);
-                voiceSelect.value = savedVoiceIndex;
-                this.currentVoice = this.voices[savedVoiceIndex];
             }
-        }
-    }
 
-    setupControls() {
-        const toggleBtn = document.getElementById('toggle-reader');
-        if (toggleBtn) toggleBtn.addEventListener('click', () => this.toggleReader());
-
-        const speedControl = document.getElementById('speed-control');
-        if (speedControl) speedControl.addEventListener('input', e => {
-            this.rate = parseFloat(e.target.value);
-            this.saveSetting('rate', this.rate);
-        });
-
-        const voiceSelect = document.getElementById('voice-select');
-        if (voiceSelect) voiceSelect.addEventListener('change', e => {
-            const idx = parseInt(e.target.value);
-            this.currentVoice = this.voices[idx];
-            this.saveSetting('voiceIndex', idx);
-        });
-    }
-
-    updateUIFromSettings() {
-        const toggleBtn = document.getElementById('toggle-reader');
-        if (toggleBtn) toggleBtn.textContent = this.isActive ? 'Disable Screen Reader' : 'Enable Screen Reader';
-
-        const speedControl = document.getElementById('speed-control');
-        if (speedControl) speedControl.value = this.rate;
-    }
-
-    toggleReader() {
-        this.isActive = !this.isActive;
-        this.saveSetting('isActive', this.isActive);
-        const toggleBtn = document.getElementById('toggle-reader');
-        if (toggleBtn) toggleBtn.textContent = this.isActive ? 'Disable Screen Reader' : 'Enable Screen Reader';
-        this.speakText(this.isActive ? 'Screen reader enabled' : 'Screen reader disabled');
-    }
-
-    speakText(text) {
-        if (!this.isActive) return;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.voice = this.currentVoice;
-        utterance.rate = this.rate;
-        this.synth.speak(utterance);
-    }
-
-    // ---------------- Dark Mode ----------------
-    initDarkModeToggle() {
-        // Apply dark mode globally if enabled
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
+            const voiceSelect = document.getElementById('voice-select');
+            if (voiceSelect) voiceSelect.addEventListener('change', e => {
+                const idx = parseInt(e.target.value);
+                this.currentVoice = this.voices[idx];
+                this.saveSetting('voiceIndex', idx);
+                this.speakText("Voice changed");
+            });
         }
 
-        const toggle = document.getElementById('dark-mode-toggle');
-        if (!toggle) return;
+        updateUIFromSettings() {
+            const toggleBtn = document.getElementById('toggle-reader');
+            if (toggleBtn) toggleBtn.textContent = this.isActive ? 'Disable Screen Reader' : 'Enable Screen Reader';
+        }
 
-        const slider = toggle.querySelector('.toggle-slider');
-        if (slider) slider.style.left = localStorage.getItem('darkMode') === 'true' ? '26px' : '0px';
+        toggleReader() {
+            this.isActive = !this.isActive;
+            this.saveSetting('isActive', this.isActive);
+            this.updateUIFromSettings();
+            this.speakText(this.isActive ? 'Screen reader enabled' : 'Screen reader disabled');
+        }
 
-        toggle.addEventListener('click', () => {
-            const isActive = document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', isActive);
-            if (slider) slider.style.left = isActive ? '26px' : '0px';
-        });
-    }
+        speakText(text) {
+            if (!this.isActive || !this.currentVoice) return;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = this.currentVoice;
+            utterance.rate = this.rate;
+            this.synth.speak(utterance);
+        }
+
+        initDarkModeToggle() {
+            const button = document.getElementById('toggle');
+            if (!button) return;
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') document.body.classList.add('dark');
+
+            button.addEventListener('click', () => {
+                document.body.classList.toggle('dark');
+                const isDark = document.body.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        }
+    };
+
+    // Initialize instance
+    window.screenReader = new window.SimpleScreenReader();
 }
-
-// ---------------- Initialization ----------------
-document.addEventListener('DOMContentLoaded', () => {
-    // Apply dark mode to all pages if enabled
-    if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-mode');
-    }
-
-    // Initialize screen reader on all pages
-    const screenReader = new SimpleScreenReader();
-    window.screenReader = screenReader;
-});
-

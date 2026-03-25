@@ -163,6 +163,7 @@
   </style>
 </head>
 <body>
+  <script src="../scripts/settings.js"></script>
 <?php include('../includes/navbar.php'); ?>
 
 <main>

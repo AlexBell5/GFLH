@@ -383,3 +383,8 @@ body.dark .quantity-input:focus {
     border-color: #16a34a;
     box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.3);
 }
+
+body.dark {
+  color: #f1f1f1; /* light text for dark background */
+  background-color: #121212; /* optional page background */
+}

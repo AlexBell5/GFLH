@@ -1,0 +1,166 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #1a1a1a;
+    background-color: #f9f9f9;
+}
+
+.producers-section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.producers-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.producers-section p {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+/* Producer Card */
+.producer-card {
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.producer-image img {
+    width: 300px;
+    height: auto;
+    object-fit: cover;
+}
+
+.producer-info {
+    padding: 20px 30px;
+    flex: 1;
+    text-align: left;
+}
+
+.producer-info h2 {
+    margin-top: 0;
+}
+
+.producer-meta {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.methods span {
+    display: inline-block;
+    background: #eee;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: #2e7d32;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
+
+/* Benefits Section */
+.benefits {
+    background: #eaf7ef;
+    padding: 40px 20px;
+    border-radius: 10px;
+}
+
+.benefits h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.benefit h3 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+/* --- Dark Mode --- */
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .producers-section p,
+body.dark .producer-meta,
+body.dark .benefit p {
+    color: #cccccc;
+}
+
+body.dark .producer-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+body.dark .producer-info h2,
+body.dark .benefit h3 {
+    color: #90ee90; /* lighter green for contrast */
+}
+
+body.dark .methods span {
+    background-color: #333;
+    color: #ccc;
+}
+
+body.dark .benefits {
+    background-color: #1a1a1a;
+}
+
+body.dark button.btn-primary {
+    background-color: #90ee90;
+    color: #121212;
+}
+
+body.dark button.btn-secondary {
+    background-color: #333;
+    color: #90ee90;
+    border: 1px solid #90ee90;
+}
+
+body.dark .dark-toggle {
+    background-color: #333;
+    color: #90ee90;
+    border: 1px solid #90ee90;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -617,3 +617,16 @@ body.dark .footer-divider {
 body, .hero, .benefit-card, .product-card, .cta-section, footer {
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+
+body.dark .cta-section * {
+    color: #f1f1f1;
+}
+
+body.dark .section-title,
+body.dark .section-title * {
+    color: #f1f1f1; 
+}
+
+body.dark .benefit-card * {
+    color: #f1f1f1;
+}

@@ -268,9 +268,20 @@
 .checkout-btn:hover {
   background: #15803d;
 }
+/* === Dark Mode Navbar & Cart Sidebar === */
+
+/* Navbar */
 body.dark .navbar {
     background-color: #1f1f1f;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+body.dark .navbar-logo .logo-main {
+    color: #16a34a;
+}
+
+body.dark .navbar-logo .logo-sub {
+    color: #f1f1f1;
 }
 
 body.dark .nav-link {
@@ -281,15 +292,18 @@ body.dark .nav-link:hover {
     color: #16a34a;
 }
 
+body.dark .nav-link::after {
+    background-color: #16a34a;
+}
 
 body.dark .navbar-icon {
-    color: #f1f1f1; /* light so visible on dark background */
-    background-color: transparent; /* optional, if you want no background */
+    color: #f1f1f1;
+    background-color: transparent;
 }
 
 body.dark .navbar-icon:hover {
-    background-color: #333333; /* slightly lighter on hover */
-    color: #16a34a; /* green on hover */
+    background-color: #333333;
+    color: #16a34a;
 }
 
 body.dark .btn-login {
@@ -300,31 +314,68 @@ body.dark .btn-login {
 body.dark .btn-login:hover {
     background-color: #15803d;
     box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+    transform: translateY(-2px);
 }
 
-/* Cart sidebar dark mode */
+body.dark .btn-login:active {
+    transform: translateY(0);
+}
+
+/* Cart Sidebar */
 body.dark .cart-sidebar {
-    background-color: #1f1f1f !important;
-    color: #f1f1f1 !important;
+    background-color: #1f1f1f;
+    color: #f1f1f1;
 }
 
 body.dark .cart-header,
 body.dark .cart-items,
 body.dark .cart-item {
     background-color: #1f1f1f;
-    color: black;
+    color: #f1f1f1;
     border-color: #333;
+}
+
+body.dark .cart-item p {
+    color: #f1f1f1;
 }
 
 body.dark .checkout-btn {
     background-color: #16a34a;
-    color: black;
+    color: #ffffff;
 }
 
 body.dark .checkout-btn:hover {
     background-color: #15803d;
+    color: #ffffff;
 }
-/* Dark mode toggle container */
+
+/* Smooth transitions for toggle */
+body.dark .navbar,
+body.dark .nav-link,
+body.dark .navbar-icon,
+body.dark .btn-login,
+body.dark .cart-sidebar,
+body.dark .cart-header,
+body.dark .cart-item,
+body.dark .checkout-btn {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body.dark #screen-reader-container,
+body.dark .settings-option {
+    background-color: #1f1f1f;
+    color: #f1f1f1;
+}
+/* Move slider when dark mode is active */
+body.dark .toggle-slider {
+    left: 26px;
+}
+
+/* Optional: change background when active */
+body.dark .toggle-switch {
+    background-color: #4caf50;
+}
+
 .toggle-switch {
     width: 50px;
     height: 26px;
@@ -346,24 +397,3 @@ body.dark .checkout-btn:hover {
     transition: left 0.2s;
 }
 
-/* Dark mode theme for page */
-body.dark {
-    background-color: #121212;
-    color: #f1f1f1;
-}
-
-/* Optional: dark mode for other elements */
-body.dark #screen-reader-container,
-body.dark .settings-option {
-    background-color: #1f1f1f;
-    color: #f1f1f1;
-}
-/* Move slider when dark mode is active */
-body.dark .toggle-slider {
-    left: 26px;
-}
-
-/* Optional: change background when active */
-body.dark .toggle-switch {
-    background-color: #4caf50;
-}

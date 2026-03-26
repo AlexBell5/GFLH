@@ -26,7 +26,7 @@ if ($conn->connect_error) {
     <?php include('../includes/navbar.php'); ?>
 
 <div id="screen-reader-container">
-    <h2>Accesibility Settings</h2>
+    <h2>Accessibility Settings</h2>
     <button id="toggle-reader">Enable Screen Reader</button>
     <label>
         Speed: <input type="range" id="speed-control" min="0.5" max="2" step="0.1" value="1">

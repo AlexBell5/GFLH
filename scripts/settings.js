@@ -114,3 +114,7 @@ if (!window.SimpleScreenReader) {
     // Initialize instance
     window.screenReader = new window.SimpleScreenReader();
 }
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}

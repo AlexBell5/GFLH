@@ -144,3 +144,50 @@ button:focus, input:focus, select:focus {
     outline: 3px solid #16a34a;
     outline-offset: 2px;
 }
+/* Google Translate Frame */
+.translate-frame {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.translate-frame h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Dark Mode */
+body.dark .translate-frame {
+    background-color: #1f1f1f;
+    border: 1px solid #444;
+    color: #f1f1f1;
+}
+
+body.dark .translate-frame h3 {
+    color: #f1f1f1;
+}
+
+/* Google Translate Dropdown inside Frame */
+.translate-frame select.goog-te-combo {
+    width: 100%;
+    max-width: 200px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Dark Mode for dropdown */
+body.dark .translate-frame select.goog-te-combo {
+    background-color: #2a2a2a !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}

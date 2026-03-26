@@ -111,11 +111,10 @@ try {
     exit;
 
 } catch (Exception $e) {
-    // Rollback transaction on error
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
     }
-    // Log the error in real application
-    header("Location: /GFLH/pages/products.php?error=unknown");
+
+    echo "Error: " . $e->getMessage();
     exit;
 }

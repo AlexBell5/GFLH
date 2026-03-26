@@ -50,24 +50,21 @@ try {
             FOREIGN KEY (farmer_id) REFERENCES users(user_id) ON DELETE CASCADE
         )
     ");
-
-    // Create orders table
-    $pdo->exec("
-        CREATE TABLE IF NOT EXISTS orders (
-            shipment_id INT AUTO_INCREMENT PRIMARY KEY,
-            order_id INT NOT NULL UNIQUE,
-            customer_id INT NOT NULL,
-            product_id INT NOT NULL,
-            quantity INT NOT NULL,
-            order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            total_price DECIMAL(10, 2) NOT NULL,
-            delivery_method ENUM('delivery', 'collection') NOT NULL,
-            delivery_address VARCHAR(255),
-            order_status ENUM('basket','pending', 'confirmed', 'shipped', 'completed', 'cancelled') DEFAULT 'pending',
-            FOREIGN KEY (customer_id) REFERENCES users(user_id) ON DELETE CASCADE,
-            FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
-        )
-    ");
+$pdo->exec("
+CREATE TABLE IF NOT EXISTS orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_price DECIMAL(10, 2) NOT NULL,
+    delivery_method ENUM('delivery', 'collection') NOT NULL,
+    delivery_address VARCHAR(255),
+    order_status ENUM('basket','pending', 'confirmed', 'shipped', 'completed', 'cancelled') DEFAULT 'basket',
+    FOREIGN KEY (customer_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);
+");
 
 } catch (PDOException $e) {
     die("Database setup failed: " . $e->getMessage());

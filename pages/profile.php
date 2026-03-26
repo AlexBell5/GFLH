@@ -98,7 +98,7 @@ $stmt->close();
         $sales_stmt = $conn->prepare("
             SELECT 
                 SUM(o.total_price) as total_sales,
-                COUNT(DISTINCT o.shipment_id) as total_orders,
+                COUNT(DISTINCT o.order_id) as total_orders,
                 COUNT(DISTINCT o.customer_id) as total_customers
             FROM orders o
             JOIN products p ON o.product_id = p.product_id
@@ -115,7 +115,7 @@ $stmt->close();
                 u.username as customer_name,
                 u.email as customer_email,
                 SUM(o.total_price) as total_spent,
-                COUNT(DISTINCT o.shipment_id) as orders_count,
+                COUNT(DISTINCT o.order_id) as orders_count,
                 MAX(o.order_date) as last_order_date
             FROM orders o
             JOIN products p ON o.product_id = p.product_id
@@ -136,7 +136,7 @@ $stmt->close();
         // Get recent orders
         $recent_orders_stmt = $conn->prepare("
             SELECT 
-                o.shipment_id,
+                o.order_id,
                 o.order_date,
                 o.total_price,
                 o.quantity,

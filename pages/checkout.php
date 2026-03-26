@@ -47,7 +47,7 @@
         // Get all basket items
         $stmt = $pdo->prepare("
             SELECT 
-              o.shipment_id,
+              o.order_id,
               o.product_id,
               o.quantity,
               o.total_price,

@@ -17,7 +17,7 @@ try {
 
     // Get all basket items for this customer
     $stmt = $pdo->prepare("
-        SELECT o.shipment_id, o.product_id, o.quantity, p.farmer_id
+        SELECT o.order_id, o.product_id, o.quantity, p.farmer_id
         FROM orders o
         JOIN products p ON o.product_id = p.product_id
         WHERE o.customer_id = ? AND o.order_status = 'basket'
@@ -57,9 +57,9 @@ try {
         $update_order = $pdo->prepare("
             UPDATE orders 
             SET order_status = 'completed' 
-            WHERE shipment_id = ?
+            WHERE order_id = ?
         ");
-        $update_order->execute([$item['shipment_id']]);
+        $update_order->execute([$item['order_id']]);
     }
 
     // Commit transaction
@@ -70,6 +70,7 @@ try {
     exit;
 
 } catch (Exception $e) {
+    echo "<p style='color:red'>DB error: " . $e->getMessage() . "</p>";
     $pdo->rollBack();
     header("Location: ../pages/cart.php?error=checkout_failed");
     exit;

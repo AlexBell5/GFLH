@@ -67,7 +67,7 @@ $is_logged_in = isset($_SESSION['user_id']);
 
             $stmt = $pdo->prepare("
                 SELECT 
-                    o.shipment_id,
+                    o.order_id,
                     o.quantity,
                     o.total_price,
                     p.product_name

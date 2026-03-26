@@ -15,7 +15,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // Get customer's completed orders
 $stmt = $pdo->prepare("
     SELECT 
-      o.shipment_id,
+      o.order_id,
       o.order_id,
       o.order_date,
       o.total_price,
@@ -56,21 +56,21 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php if (count($orders) > 0): ?>
     <div class="orders-container">
       <?php 
-      // Group orders by shipment_id for display
+      // Group orders by order_id for display
       $grouped_orders = [];
       foreach ($orders as $order) {
-        if (!isset($grouped_orders[$order['shipment_id']])) {
-          $grouped_orders[$order['shipment_id']] = [];
+        if (!isset($grouped_orders[$order['order_id']])) {
+          $grouped_orders[$order['order_id']] = [];
         }
-        $grouped_orders[$order['shipment_id']][] = $order;
+        $grouped_orders[$order['order_id']][] = $order;
       }
       ?>
 
-      <?php foreach ($grouped_orders as $shipment_id => $order_items): 
+      <?php foreach ($grouped_orders as $order_id => $order_items): 
         $first_item = $order_items[0];
-        $shipment_total = 0;
+        $order_total = 0;
         foreach ($order_items as $item) {
-          $shipment_total += $item['total_price'];
+          $order_total += $item['total_price'];
         }
       ?>
         <div class="order-card">
@@ -102,7 +102,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <div class="order-footer">
             <div class="order-total">
               <span class="total-label">Order Total:</span>
-              <span class="total-amount">£<?php echo number_format($shipment_total, 2); ?></span>
+              <span class="total-amount">£<?php echo number_format($order_total, 2); ?></span>
             </div>
           </div>
         </div>

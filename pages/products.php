@@ -63,7 +63,6 @@ $conn->close();
 </head>
 
 <body>
-
 <?php include('../includes/navbar.php'); ?>
 <script src="../scripts/settings.js"></script>
 <main>
@@ -163,7 +162,7 @@ $conn->close();
 
                 <!-- ACTIONS -->
                 <div class="product-actions">
-<form method="POST" action="/GFLH/handlers/add_to_cart.php" class="cart-form">
+<form method="POST" action="/GFLH/handlers/add_to_cart.php" class="cart-form" data-product-id="<?php echo $product['product_id']; ?>">
   
   <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
 
@@ -176,14 +175,11 @@ $conn->close();
     class="quantity-input"
   >
 
-
-
-
   <button class="btn-add-cart"
     <?php if ($product['stock_quantity'] <= 0) echo 'disabled'; ?>>
     Add to Cart
   </button>
-
+  <span class="add-cart-msg" style="margin-left:8px;color:green;"></span>
 </form>
                 </div>
 
@@ -222,16 +218,49 @@ document.getElementById("searchInput").addEventListener("keyup", function () {
     }
   });
 });
-</script>
 
-<!-- SORT SCRIPT -->
-<script>
+// SORT SCRIPT
 function handleSortChange(value) {
   if (value === "") return;
   window.location.href = "?sort=" + value;
 }
-</script>
 
+document.querySelectorAll('.cart-form').forEach(form => {
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const formData = new FormData(form);
+    const msgSpan = form.querySelector('.add-cart-msg');
+
+    try {
+        const response = await fetch(form.action, { method:'POST', body:formData, credentials:'same-origin' });
+        const data = await response.json();
+
+        if(data.status==='success'){
+            msgSpan.style.color='green';
+            msgSpan.textContent=data.message;
+
+            // Update navbar count
+            const cartCountElem = document.getElementById('cartCount');
+            if(cartCountElem) cartCountElem.textContent = data.cart_count;
+
+            // Update sidebar
+            if(window.refreshCartSidebar) window.refreshCartSidebar();
+
+        } else {
+            msgSpan.style.color='red';
+            msgSpan.textContent=data.message;
+        }
+
+        setTimeout(()=>msgSpan.textContent='',2000);
+
+    } catch(err){
+        msgSpan.style.color='red';
+        msgSpan.textContent='Network error';
+        setTimeout(()=>msgSpan.textContent='',2000);
+    }
+  });
+});
+</script>
 
 </body>
 </html>

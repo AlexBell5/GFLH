@@ -100,10 +100,10 @@
             </div>
           </div>
 
-          <form method="POST" action="../handlers/checkout.php" style="display: flex; gap: 15px;">
-            <button type="submit" class="btn-complete">Complete Order</button>
-            <a href="../pages/products.php" class="btn-cancel">Continue Shopping</a>
-          </form>
+<form method="GET" action="../pages/payment.php" style="display: flex; gap: 15px;">
+    <button type="submit" class="btn-complete">Proceed to Payment</button>
+    <a href="../pages/products.php" class="btn-cancel">Continue Shopping</a>
+</form>
         <?php endif; ?>
 
     <?php } catch (Exception $e) { ?>

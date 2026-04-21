@@ -20,20 +20,24 @@ if (!isset($_SESSION['user_id'])) {
 
 <h2 style="text-align:center;">Enter Payment Details</h2>
 
-<form method="POST" action="../handlers/checkout.php" style="max-width:400px;margin:40px auto;">
-    
-    <label>Card Number</label>
-    <input type="text" name="card_number" required>
+<div class="payment-container">
+    <h2>Enter Payment Details</h2>
 
-    <label>Expiry (MM/YY)</label>
-    <input type="text" name="expiry" required>
+    <form method="POST" action="../handlers/checkout.php">
+        
+        <label>Card Number</label>
+        <input type="text" name="card_number" required>
 
-    <label>CVV</label>
-    <input type="text" name="cvv" required>
+        <label>Expiry (MM/YY)</label>
+        <input type="text" name="expiry" required>
 
-    <button type="submit">Complete Order</button>
+        <label>CVV</label>
+        <input type="text" name="cvv" required>
 
-</form>
+        <button type="submit">Complete Order</button>
+
+    </form>
+</div>
 
 </body>
 </html>

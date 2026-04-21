@@ -106,7 +106,7 @@ body.dark .payment-container h2 {
 
 /* Labels */
 body.dark .payment-container label {
-    color: #ccc;
+    color: white;
 }
 
 /* Inputs */

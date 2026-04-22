@@ -26,16 +26,18 @@ if (!isset($_SESSION['user_id'])) {
     <form method="POST" action="../handlers/checkout.php">
         
         <label>Card Number</label>
-        <input type="text" name="card_number" required>
+    <input type="text" name="card_number" id="card_number" required 
+           pattern="\d{16}" maxlength="16" placeholder="1234123412341234">
 
-        <label>Expiry (MM/YY)</label>
-        <input type="text" name="expiry" required>
+    <label>Expiry (MM/YY)</label>
+    <input type="text" name="expiry" id="expiry" required 
+           pattern="^(0[1-9]|1[0-2])\/\d{2}$" placeholder="MM/YY">
 
-        <label>CVV</label>
-        <input type="text" name="cvv" required>
+    <label>CVV</label>
+    <input type="text" name="cvv" id="cvv" required 
+           pattern="\d{3,4}" maxlength="4" placeholder="123">
 
-        <button type="submit">Complete Order</button>
-
+    <button type="submit">Complete Order</button>
     </form>
 </div>
 

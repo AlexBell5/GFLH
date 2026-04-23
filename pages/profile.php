@@ -297,8 +297,7 @@ $stmt->close();
     <section>
       <h2>Account Settings</h2>
       <p>
-        <button onclick="toggleEditForm()" style="cursor:pointer; padding:8px 12px; background:
-        <a href="../handlers/logout.php">Logout</a>
+        <button onclick="toggleEditForm()">✏️ Edit Profile</button>
       </p>
     </section>
 

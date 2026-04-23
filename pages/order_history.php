@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Redirect if not logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../pages/login.php");
     exit;
@@ -12,7 +12,7 @@ $customer_id = $_SESSION['user_id'];
 $pdo = new PDO("mysql:host=localhost;dbname=GFLH", "root", "");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Get customer's completed orders
+
 $stmt = $pdo->prepare("
     SELECT 
       o.order_id,
@@ -56,7 +56,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php if (count($orders) > 0): ?>
     <div class="orders-container">
       <?php 
-      // Group orders by order_id for display
+      
       $grouped_orders = [];
       foreach ($orders as $order) {
         if (!isset($grouped_orders[$order['order_id']])) {
@@ -76,7 +76,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="order-card">
           <div class="order-header">
             <div class="order-info">
-              <div class="order-id">Order #<?php echo $first_item['order_id']; ?></div>
+              <div class="order-id">Order 
               <div class="order-date"><?php echo date('F d, Y \a\t H:i', strtotime($first_item['order_date'])); ?></div>
             </div>
             <div class="order-status status-<?php echo strtolower($first_item['order_status']); ?>">
@@ -119,3 +119,4 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </body>
 </html>
+

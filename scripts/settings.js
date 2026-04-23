@@ -1,4 +1,4 @@
-// Only define if not already defined
+
 if (!window.SimpleScreenReader) {
 
     window.SimpleScreenReader = class {
@@ -111,7 +111,7 @@ if (!window.SimpleScreenReader) {
         }
     };
 
-    // Initialize instance
+    
     window.screenReader = new window.SimpleScreenReader();
 }
 

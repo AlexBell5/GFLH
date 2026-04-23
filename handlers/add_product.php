@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// حماية
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'farmer') {
     header("Location: ../pages/login.php");
     exit;
 }
 
-// DB
+
 $conn = new mysqli('localhost', 'root', '', 'GFLH');
 
 if ($conn->connect_error) {
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pickup_option = isset($_POST['pickup_option']) ? 1 : 0;
     $address = trim($_POST['address']);
 
-    // ✅ VALIDATION
+    
     if (
         empty($product_name) ||
         $price <= 0 ||
@@ -37,13 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // ✅ MUST SELECT ONE OPTION
+    
     if (!$delivery_option && !$pickup_option) {
         header("Location: ../add-product.php?error=validation_failed");
         exit;
     }
 
-    // Image upload
+    
     $image_path = null;
 
     if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === 0) {
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Insert
+    
     $stmt = $conn->prepare("
         INSERT INTO products 
         (farmer_id, product_name, description, price, stock_quantity, image_path, delivery_option, pickup_option, delivery_address)

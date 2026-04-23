@@ -1,6 +1,4 @@
-/* =========================
-   LIGHT MODE (DEFAULT)
-========================= */
+
 
 body {
     font-family: Arial, sans-serif;
@@ -84,45 +82,42 @@ body {
     text-align: center;
 }
 
-/* =========================
-   DARK MODE
-   (body.dark must exist)
-========================= */
+
 
 body.dark {
     background: #121212;
 }
 
-/* Container */
+
 body.dark .payment-container {
     background: #1e1e1e;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
-/* Title */
+
 body.dark .payment-container h2 {
     color: #f1f1f1;
 }
 
-/* Labels */
+
 body.dark .payment-container label {
     color: white;
 }
 
-/* Inputs */
+
 body.dark .payment-container input {
     background: #2a2a2a;
     color: #f1f1f1;
     border: 1px solid #444;
 }
 
-/* Input focus */
+
 body.dark .payment-container input:focus {
     border-color: #66bb6a;
     box-shadow: 0 0 6px rgba(102, 187, 106, 0.5);
 }
 
-/* Button */
+
 body.dark .payment-container button {
     background: #66bb6a;
 }
@@ -131,8 +126,9 @@ body.dark .payment-container button:hover {
     background: #57a05a;
 }
 
-/* Error message */
+
 body.dark .error-message {
     background: #3a1f1f;
     color: #ff6b6b;
 }
+

@@ -1,5 +1,5 @@
 <?php
-// handlers/signup.php
+
 session_start();
 
 $host = 'localhost';
@@ -21,35 +21,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm  = $_POST['confirm-password'];
     $role     = $_POST['role'] ?? 'customer';
 
-    // Validate role
+    
     if (!in_array($role, ['customer', 'farmer'])) {
         header("Location: ../pages/signup.php?error=invalid_role");
         exit;
     }
 
-    // Password mismatch
+    
     if ($password !== $confirm) {
         header("Location: ../pages/signup.php?error=password_mismatch");
         exit;
     }
 
-    // ✅ Check if email already exists
+    
     $check = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
     $check->bind_param("s", $email);
     $check->execute();
     $check->store_result();
 
     if ($check->num_rows > 0) {
-        // Email already registered
+        
         header("Location: ../pages/signup.php?error=email_exists");
         exit;
     }
     $check->close();
 
-    // Hash password
+    
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert user
+    
     $stmt = $conn->prepare(
         "INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)"
     );
@@ -63,3 +63,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+

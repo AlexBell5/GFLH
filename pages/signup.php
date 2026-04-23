@@ -101,7 +101,7 @@
       <div class="form-options">
         <label class="remember-me">
           <input type="checkbox" required />
-          I agree to the <a href="#">Terms & Conditions</a>
+          I agree to the <a href="
         </label>
       </div>
 
@@ -122,3 +122,4 @@
 
 </body>
 </html>
+

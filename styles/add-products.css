@@ -1,8 +1,7 @@
-/* =========================
-   ADD PRODUCT PAGE STYLES
-   ========================= */
 
-/* GENERAL STYLES */
+
+
+/* Body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f6;
@@ -11,6 +10,7 @@ body {
     color: #333;
 }
 
+/* Headings */
 h1 {
     text-align: center;
     font-size: 2em;
@@ -18,7 +18,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* FORM STYLING */
+
+/* Form */
 form {
     max-width: 600px;
     margin: 0 auto 50px auto;
@@ -31,7 +32,7 @@ form {
     gap: 15px;
 }
 
-/* INPUT FIELDS */
+/* Inputs */
 input[type="text"],
 input[type="number"],
 input[type="file"],
@@ -46,17 +47,18 @@ textarea {
     resize: vertical;
 }
 
+/* Focus */
 input:focus,
 textarea:focus {
     border-color: #007bff;
 }
 
-/* TEXTAREA */
+/* Textarea */
 textarea {
     min-height: 80px;
 }
 
-/* CHECKBOXES */
+/* Labels */
 label {
     display: inline-flex;
     align-items: center;
@@ -64,18 +66,19 @@ label {
     font-size: 0.95em;
 }
 
+/* Checkboxes */
 input[type="checkbox"] {
     margin-right: 6px;
 }
 
-/* DELIVERY ADDRESS HEADING */
+/* Headings */
 h3, h4, h5, h6, h {
     font-size: 1em;
     margin-bottom: 5px;
     font-weight: 600;
 }
 
-/* SUBMIT BUTTON */
+/* Buttons */
 button[type="submit"] {
     padding: 12px 18px;
     background-color: #16a34a;
@@ -88,11 +91,12 @@ button[type="submit"] {
     transition: 0.2s all ease;
 }
 
+/* Button Hover */
 button[type="submit"]:hover {
     background-color: #15803d;
 }
 
-/* ERROR MESSAGE */
+/* Messages */
 p[style*="color:red"] {
     text-align: center;
     font-weight: 500;
@@ -101,7 +105,7 @@ p[style*="color:red"] {
     border-radius: 6px;
 }
 
-/* RESPONSIVE */
+/* Media Queries */
 @media (max-width: 640px) {
     form {
         padding: 20px;
@@ -112,10 +116,8 @@ p[style*="color:red"] {
         margin-bottom: 10px;
     }
 }
-/* =========================
-   DARK MODE OVERRIDES
-   ========================= */
 
+/* Dark Mode */
 body.dark {
     background-color: #121212;
     color: #f1f1f1;

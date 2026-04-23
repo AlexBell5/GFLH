@@ -12,10 +12,10 @@ $pdo = new PDO("mysql:host=localhost;dbname=GFLH", "root", "");
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try {
-    // Start transaction
+    
     $pdo->beginTransaction();
 
-    // Get all basket items for this customer
+    
     $stmt = $pdo->prepare("
         SELECT o.order_id, o.product_id, o.quantity, p.farmer_id
         FROM orders o
@@ -31,7 +31,7 @@ try {
         exit;
     }
 
-    // Check if any items are from the customer's own farm (if they're a farmer)
+    
     $user_role = $_SESSION['role'] ?? '';
     if ($user_role === 'farmer') {
         foreach ($basket_items as $item) {
@@ -43,9 +43,9 @@ try {
         }
     }
 
-    // Process each item
+    
     foreach ($basket_items as $item) {
-        // Decrease product stock
+        
         $update_stock = $pdo->prepare("
             UPDATE products 
             SET stock_quantity = stock_quantity - ? 
@@ -53,7 +53,7 @@ try {
         ");
         $update_stock->execute([$item['quantity'], $item['product_id']]);
 
-        // Update order status to completed
+        
         $update_order = $pdo->prepare("
             UPDATE orders 
             SET order_status = 'completed' 
@@ -62,10 +62,10 @@ try {
         $update_order->execute([$item['order_id']]);
     }
 
-    // Commit transaction
+    
     $pdo->commit();
 
-    // Redirect to success page
+    
     header("Location: ../pages/products.php?checkout=success");
     exit;
 
@@ -76,3 +76,4 @@ try {
     exit;
 }
 ?>
+

@@ -189,13 +189,13 @@ main {
       background: #15803d;
     }
 
-    /* PAGE */
+    
 body.dark {
   background-color: #121212;
   color: #f1f1f1;
 }
 
-/* HEADER */
+
 body.dark .history-header {
   border-bottom: 2px solid #16a34a;
 }
@@ -208,7 +208,7 @@ body.dark .history-header p {
   color: #9ca3af;
 }
 
-/* CARD */
+
 body.dark .order-card {
   background-color: #1f1f1f;
   border-color: #333;
@@ -218,7 +218,7 @@ body.dark .order-card:hover {
   box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
 }
 
-/* ORDER HEADER */
+
 body.dark .order-header {
   background-color: #1a1a1a;
   border-bottom: 1px solid #333;
@@ -232,7 +232,7 @@ body.dark .order-date {
   color: #6b7280;
 }
 
-/* STATUS BADGES */
+
 body.dark .status-completed {
   background: #1b5e20;
   color: #a5d6a7;
@@ -253,7 +253,7 @@ body.dark .status-shipped {
   color: #67e8f9;
 }
 
-/* BODY */
+
 body.dark .order-body {
   color: #f1f1f1;
 }
@@ -262,7 +262,7 @@ body.dark .order-item {
   border-bottom: 1px solid #333;
 }
 
-/* ITEMS */
+
 body.dark .item-name {
   color: #f1f1f1;
 }
@@ -279,7 +279,7 @@ body.dark .item-price {
   color: #16a34a;
 }
 
-/* FOOTER */
+
 body.dark .order-footer {
   background-color: #1a1a1a;
   border-top: 1px solid #333;
@@ -293,7 +293,7 @@ body.dark .total-amount {
   color: #16a34a;
 }
 
-/* EMPTY STATE */
+
 body.dark .empty-state {
   color: #9ca3af;
 }

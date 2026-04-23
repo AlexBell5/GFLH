@@ -6,21 +6,21 @@ $pass = "";
 $dbname = "GFLH";
 
 try {
-    // Connect without database first
+    
     $pdo = new PDO("mysql:host=$host;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Create database if not exists
+    
     $pdo->exec("
         CREATE DATABASE IF NOT EXISTS GFLH
         CHARACTER SET utf8mb4
         COLLATE utf8mb4_unicode_ci
     ");
 
-    // Select database
+    
     $pdo->exec("USE GFLH");
 
-    // Create users table
+    
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS users (
             user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,7 +33,7 @@ try {
         )
     ");
 
-    // Create products table
+    
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS products (
             product_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS orders (
     die("Database setup failed: " . $e->getMessage());
 }
 
-// Fetch featured products (latest 4 in stock)
+
 $featuredProducts = $pdo->query("
     SELECT p.product_id, p.product_name, p.price, p.stock_quantity, p.image_path, u.username as farmer_name
     FROM products p
@@ -80,7 +80,7 @@ $featuredProducts = $pdo->query("
     LIMIT 4
 ")->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch stats
+
 $farmerCount = $pdo->query("SELECT COUNT(*) as count FROM users WHERE role = 'farmer'")->fetch()['count'];
 $productCount = $pdo->query("SELECT COUNT(*) as count FROM products")->fetch()['count'];
 
@@ -90,7 +90,7 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // --- Add Producers (farmers) ---
+    
     $farmers = [
         ['username' => 'Green Valley Farm', 'email' => 'greenvalley@example.com', 'password' => password_hash('password123', PASSWORD_DEFAULT)],
         ['username' => 'Sunrise Dairy', 'email' => 'sunrisedairy@example.com', 'password' => password_hash('password123', PASSWORD_DEFAULT)],
@@ -102,7 +102,7 @@ try {
     $getFarmer = $pdo->prepare("SELECT user_id FROM users WHERE email = :email");
 
     foreach ($farmers as $farmer) {
-        // Check if farmer already exists
+        
         $getFarmer->execute([':email' => $farmer['email']]);
         if (!$getFarmer->fetchColumn()) {
             $insertFarmer->execute([
@@ -113,23 +113,23 @@ try {
         }
     }
 
-    // --- Add Products ---
+    
     $products = [
-        // Green Valley Farm
+        
         ['farmer_email' => 'greenvalley@example.com', 'product_name' => 'Tomatoes', 'price' => 2.50, 'stock_quantity' => 50],
         ['farmer_email' => 'greenvalley@example.com', 'product_name' => 'Carrots', 'price' => 1.80, 'stock_quantity' => 60],
         ['farmer_email' => 'greenvalley@example.com', 'product_name' => 'Free-range Eggs', 'price' => 3.20, 'stock_quantity' => 40],
 
-        // Sunrise Dairy
+        
         ['farmer_email' => 'sunrisedairy@example.com', 'product_name' => 'Milk', 'price' => 1.50, 'stock_quantity' => 100],
         ['farmer_email' => 'sunrisedairy@example.com', 'product_name' => 'Cheese', 'price' => 4.50, 'stock_quantity' => 30],
         ['farmer_email' => 'sunrisedairy@example.com', 'product_name' => 'Yogurt', 'price' => 2.00, 'stock_quantity' => 50],
 
-        // Maplewood Honey
+        
         ['farmer_email' => 'maplewood@example.com', 'product_name' => 'Raw Honey', 'price' => 6.00, 'stock_quantity' => 25],
         ['farmer_email' => 'maplewood@example.com', 'product_name' => 'Beeswax Candles', 'price' => 5.00, 'stock_quantity' => 20],
 
-        // Willow Creek Bakery
+        
         ['farmer_email' => 'willowcreek@example.com', 'product_name' => 'Sourdough Bread', 'price' => 3.00, 'stock_quantity' => 40],
         ['farmer_email' => 'willowcreek@example.com', 'product_name' => 'Gluten-free Muffins', 'price' => 2.50, 'stock_quantity' => 35],
         ['farmer_email' => 'willowcreek@example.com', 'product_name' => 'Croissants', 'price' => 2.00, 'stock_quantity' => 30],
@@ -146,7 +146,7 @@ try {
         $getFarmerId->execute([':email' => $product['farmer_email']]);
         $farmerId = $getFarmerId->fetchColumn();
         if ($farmerId) {
-            // Check if product already exists for this farmer
+            
             $getProduct->execute([
                 ':product_name' => $product['product_name'],
                 ':farmer_id' => $farmerId

@@ -1,18 +1,18 @@
 <?php
 session_start();
 
-// Redirect if not logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../pages/login.php");
     exit;
 }
 
-// Get user info from session
+
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 $role = $_SESSION['role'];
 
-// Database connection
+
 $host = 'localhost';
 $db = 'GFLH';
 $dbuser = 'root';
@@ -23,7 +23,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch additional user data
+
 $stmt = $conn->prepare("SELECT email, created_at FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -67,7 +67,7 @@ $stmt->close();
       <section>
         <h2>Your Products</h2>
         <?php
-          // Fetch farmer's products
+          
           $products_stmt = $conn->prepare(
               "SELECT product_id, product_name, description, price, stock_quantity FROM products WHERE farmer_id = ? ORDER BY created_at DESC"
           );
@@ -94,7 +94,7 @@ $stmt->close();
         <h2>Sales Dashboard</h2>
         
         <?php
-        // Get sales statistics for the farmer
+        
         $sales_stmt = $conn->prepare("
             SELECT 
                 SUM(o.total_price) as total_sales,
@@ -109,7 +109,7 @@ $stmt->close();
         $sales_stats = $sales_stmt->get_result()->fetch_assoc();
         $sales_stmt->close();
         
-        // Get sales by customer
+        
         $customer_sales_stmt = $conn->prepare("
             SELECT 
                 u.username as customer_name,
@@ -133,7 +133,7 @@ $stmt->close();
         }
         $customer_sales_stmt->close();
         
-        // Get recent orders
+        
         $recent_orders_stmt = $conn->prepare("
             SELECT 
                 o.order_id,
@@ -162,20 +162,20 @@ $stmt->close();
         <!-- Sales Summary -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
           <div>
-            <h3 style="margin: 0 0 10px 0; color: #16a34a;">Total Sales</h3>
-            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #16a34a;">
+            <h3 style="margin: 0 0 10px 0; color: 
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: 
               £<?php echo number_format($sales_stats['total_sales'] ?? 0, 2); ?>
             </p>
           </div>
           <div>
-            <h3 style="margin: 0 0 10px 0; color: #2563eb;">Total Orders</h3>
-            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #2563eb;">
+            <h3 style="margin: 0 0 10px 0; color: 
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: 
               <?php echo $sales_stats['total_orders'] ?? 0; ?>
             </p>
           </div>
           <div>
-            <h3 style="margin: 0 0 10px 0; color: #dc2626;">Customers</h3>
-            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #dc2626;">
+            <h3 style="margin: 0 0 10px 0; color: 
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: 
               <?php echo $sales_stats['total_customers'] ?? 0; ?>
             </p>
           </div>
@@ -187,22 +187,22 @@ $stmt->close();
           <h3>Top Customers</h3>
           <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-              <thead style="background: #f8f9fa;">
+              <thead style="background: 
                 <tr>
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Customer</th>
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Email</th>
-                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Orders</th>
-                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Total Spent</th>
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Last Order</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($customer_sales as $customer): ?>
-                <tr style="border-bottom: 1px solid #f8f9fa;">
+                <tr style="border-bottom: 1px solid 
                   <td style="padding: 12px;"><?php echo htmlspecialchars($customer['customer_name']); ?></td>
                   <td style="padding: 12px;"><?php echo htmlspecialchars($customer['customer_email']); ?></td>
                   <td style="padding: 12px; text-align: right;"><?php echo $customer['orders_count']; ?></td>
-                  <td style="padding: 12px; text-align: right; font-weight: bold; color: #16a34a;">
+                  <td style="padding: 12px; text-align: right; font-weight: bold; color: 
                     £<?php echo number_format($customer['total_spent'], 2); ?>
                   </td>
                   <td style="padding: 12px;"><?php echo date('M d, Y', strtotime($customer['last_order_date'])); ?></td>
@@ -220,23 +220,23 @@ $stmt->close();
           <h3>Recent Sales</h3>
           <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-              <thead style="background: #f8f9fa;">
+              <thead style="background: 
                 <tr>
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Date</th>
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Product</th>
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #dee2e6;">Customer</th>
-                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Quantity</th>
-                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #dee2e6;">Amount</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid 
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($recent_orders as $order): ?>
-                <tr style="border-bottom: 1px solid #f8f9fa;">
+                <tr style="border-bottom: 1px solid 
                   <td style="padding: 12px;"><?php echo date('M d, Y H:i', strtotime($order['order_date'])); ?></td>
                   <td style="padding: 12px;"><?php echo htmlspecialchars($order['product_name']); ?></td>
                   <td style="padding: 12px;"><?php echo htmlspecialchars($order['customer_name']); ?></td>
                   <td style="padding: 12px; text-align: right;"><?php echo $order['quantity']; ?></td>
-                  <td style="padding: 12px; text-align: right; font-weight: bold; color: #16a34a;">
+                  <td style="padding: 12px; text-align: right; font-weight: bold; color: 
                     £<?php echo number_format($order['total_price'], 2); ?>
                   </td>
                 </tr>
@@ -246,10 +246,10 @@ $stmt->close();
           </div>
         </div>
         <?php else: ?>
-        <div style="text-align: center; padding: 40px; background: #f8f9fa; border-radius: 8px; margin-top: 20px;">
-          <h3 style="color: #666; margin-bottom: 10px;">No Sales Yet</h3>
-          <p style="color: #999; margin-bottom: 20px;">You haven't made any sales yet. Start by adding products to your store!</p>
-          <a href="/GFLH/handlers/add-product.php" style="display: inline-block; background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600;">Add Your First Product</a>
+        <div style="text-align: center; padding: 40px; background: 
+          <h3 style="color: 
+          <p style="color: 
+          <a href="/GFLH/handlers/add-product.php" style="display: inline-block; background: 
         </div>
         <?php endif; ?>
       </section>
@@ -292,7 +292,7 @@ $stmt->close();
     <section>
       <h2>Account Settings</h2>
       <p>
-        <button onclick="toggleEditForm()" style="cursor:pointer; padding:8px 12px; background:#007bff; color:white; border:none; border-radius:4px;">Edit Profile</button> | 
+        <button onclick="toggleEditForm()" style="cursor:pointer; padding:8px 12px; background:
         <a href="../handlers/logout.php">Logout</a>
       </p>
     </section>
@@ -364,3 +364,4 @@ $stmt->close();
 <?php
 $conn->close();
 ?>
+

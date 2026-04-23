@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Redirect if not logged in or not a farmer
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'farmer') {
     header("Location: ../pages/login.php");
     exit;
@@ -19,7 +19,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch farmer's products
+
 $stmt = $conn->prepare("
     SELECT product_id, product_name, description, price, stock_quantity, created_at
     FROM products 
@@ -164,7 +164,7 @@ function closeEditModal() {
   document.getElementById('editModal').classList.remove('active');
 }
 
-// Close modal when clicking outside
+
 window.onclick = function(event) {
   const modal = document.getElementById('editModal');
   if (event.target === modal) {
@@ -175,3 +175,4 @@ window.onclick = function(event) {
 
 </body>
 </html>
+

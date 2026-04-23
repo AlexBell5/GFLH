@@ -24,7 +24,7 @@ body {
     color: #555;
 }
 
-/* Producer Card */
+
 .producer-card {
     display: flex;
     background: #fff;
@@ -89,7 +89,7 @@ button {
     border: 1px solid #2e7d32;
 }
 
-/* Benefits Section */
+
 .benefits {
     background: #eaf7ef;
     padding: 40px 20px;
@@ -111,7 +111,7 @@ button {
     margin-top: 0;
     color: #2e7d32;
 }
-/* --- Dark Mode --- */
+
 body.dark {
     background-color: #121212;
     color: #e0e0e0;
@@ -130,7 +130,7 @@ body.dark .producer-card {
 
 body.dark .producer-info h2,
 body.dark .benefit h3 {
-    color: #90ee90; /* lighter green for contrast */
+    color: #90ee90; 
 }
 
 body.dark .methods span {

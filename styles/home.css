@@ -1,4 +1,5 @@
  
+/* Global Reset */
        * {
             margin: 0;
             padding: 0;
@@ -11,7 +12,7 @@
             line-height: 1.6;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
             color: white;
@@ -48,6 +49,7 @@
             flex-wrap: wrap;
         }
 
+        /* Buttons */
         .btn {
             padding: 15px 40px;
             border-radius: 8px;
@@ -83,7 +85,8 @@
             transform: translateY(-2px);
         }
 
-        /* Why Buy Local Section */
+        
+        /* Why Buy Section */
         .why-buy-section {
             padding: 80px 20px;
             background-color: #f8f8f8;
@@ -146,7 +149,8 @@
             line-height: 1.7;
         }
 
-        /* Featured Products Section */
+        
+        /* Featured Section */
         .featured-section {
             padding: 80px 20px;
         }
@@ -257,7 +261,7 @@
             color: #999;
         }
 
-        /* Stats Section */
+        
         .stats-section {
             background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
             color: white;
@@ -289,7 +293,7 @@
             margin-bottom: 15px;
         }
 
-        /* CTA Section */
+        
         .cta-section {
             padding: 100px 20px;
             text-align: center;
@@ -355,7 +359,7 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
+        
         footer {
             background: linear-gradient(135deg, #1a1f3a 0%, #0f1419 100%);
             color: white;
@@ -430,7 +434,7 @@
             color: #6b7280;
         }
 
-        /* Responsive */
+        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 36px;
@@ -494,13 +498,13 @@
     color: #f1f1f1;
 }
 
-/* Hero Section */
+
 body.dark .hero {
     background: linear-gradient(135deg, #0f4d2d 0%, #0b3922 100%);
     color: #f1f1f1;
 }
 
-/* Buttons */
+
 body.dark .btn-primary {
     background-color: #16a34a;
     color: white;
@@ -519,7 +523,7 @@ body.dark .btn-secondary:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Why Buy Local Section */
+
 body.dark .why-buy-section {
     background-color: #1f1f1f;
 }
@@ -538,7 +542,7 @@ body.dark .benefit-icon {
     background: linear-gradient(135deg, #1e3f2e 0%, #265b3f 100%);
 }
 
-/* Featured Products Section */
+
 body.dark .featured-section {
     background-color: #121212;
 }
@@ -560,7 +564,7 @@ body.dark .product-image {
     background: linear-gradient(135deg, #2a2a2a 0%, #3b3b3b 100%);
 }
 
-/* Stats Section */
+
 body.dark .stats-section {
     background: linear-gradient(135deg, #0f4d2d 0%, #0b3922 100%);
     color: #f1f1f1;
@@ -570,7 +574,7 @@ body.dark .stat-item p {
     opacity: 0.9;
 }
 
-/* CTA Section */
+
 body.dark .cta-section {
     background-color: #1f1f1f;
     color: #f1f1f1;
@@ -592,7 +596,7 @@ body.dark .cta-btn-secondary:hover {
     border-color: #16a34a;
 }
 
-/* Footer */
+
 body.dark footer {
     background: #0f1419;
     color: #cbd5e1;
@@ -613,7 +617,7 @@ body.dark .footer-divider {
     border-top: 1px solid #374151;
 }
 
-/* Optional smooth transitions */
+
 body, .hero, .benefit-card, .product-card, .cta-section, footer {
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }

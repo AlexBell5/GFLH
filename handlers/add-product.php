@@ -6,14 +6,14 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'farmer') {
     exit;
 }
 
-// DB connection
+
 $conn = new mysqli('localhost', 'root', '', 'GFLH');
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get saved address
+
 $address = '';
 $stmt = $conn->prepare("SELECT address FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $_SESSION['user_id']);

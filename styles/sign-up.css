@@ -1,4 +1,4 @@
-/* ===== Global Reset ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +18,7 @@ body.dark {
     color: #f1f1f1;
 }
 
-/* ===== Auth Page Layout ===== */
+
 .auth-page {
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@ body.dark .auth-card {
     color: #f1f1f1;
 }
 
-/* ===== Header ===== */
+
 .auth-header h1 {
     font-size: 32px;
     font-weight: 700;
@@ -59,7 +59,7 @@ body.dark .auth-header p {
     color: #ccc;
 }
 
-/* ===== Messages ===== */
+
 .auth-success,
 .auth-error {
     padding: 12px 15px;
@@ -88,7 +88,7 @@ body.dark .auth-error {
     color: #f1a1a1;
 }
 
-/* ===== Form ===== */
+
 .auth-form .form-group {
     margin-bottom: 15px;
 }
@@ -123,7 +123,7 @@ body.dark .auth-form input[type="password"] {
     outline: none;
 }
 
-/* ===== Radio & Checkbox ===== */
+
 .role-options {
     display: flex;
     gap: 15px;
@@ -140,7 +140,7 @@ body.dark .auth-form input[type="password"] {
     margin-right: 5px;
 }
 
-/* ===== Buttons ===== */
+
 .auth-button {
     width: 100%;
     padding: 12px;
@@ -167,7 +167,7 @@ body.dark .auth-button:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* ===== Footer ===== */
+
 .auth-footer {
     text-align: center;
     margin-top: 15px;
@@ -183,7 +183,7 @@ body.dark .auth-footer a {
     color: #66aaff;
 }
 
-/* ===== Optional Smooth Transitions ===== */
+
 .auth-card, .auth-form input, .auth-button, .auth-error, .auth-success {
     transition: all 0.3s ease;
 }

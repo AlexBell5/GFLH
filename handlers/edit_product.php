@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Redirect if not logged in or not a farmer
+
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'farmer') {
     header("Location: ../pages/login.php");
     exit;
@@ -24,13 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = floatval($_POST['price']);
     $stock_quantity = intval($_POST['stock_quantity']);
 
-    // Validate
+    
     if ($price <= 0 || $stock_quantity < 0) {
         header("Location: ../pages/manage_products.php?error=invalid_values");
         exit;
     }
 
-    // Verify product belongs to farmer
+    
     $verify = $conn->prepare("SELECT product_id FROM products WHERE product_id = ? AND farmer_id = ?");
     $verify->bind_param("ii", $product_id, $farmer_id);
     $verify->execute();
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $verify->close();
 
-    // Update product
+    
     $stmt = $conn->prepare("
         UPDATE products 
         SET price = ?, stock_quantity = ? 
@@ -63,3 +63,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $conn->close();
 ?>
+

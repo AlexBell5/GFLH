@@ -1,4 +1,4 @@
-/* Dark mode toggle container */
+
 .toggle-switch {
     width: 50px;
     height: 26px;
@@ -8,7 +8,7 @@
     cursor: pointer;
 }
 
-/* Slider inside toggle */
+
 .toggle-slider {
     width: 24px;
     height: 24px;
@@ -20,7 +20,7 @@
     transition: left 0.2s;
 }
 
-/* Global Reset */
+
 * {
     margin: 0;
     padding: 0;
@@ -40,7 +40,7 @@ body.dark {
     color: #f1f1f1;
 }
 
-/* Main Container */
+
 #screen-reader-container {
     max-width: 700px;
     margin: 50px auto;
@@ -75,7 +75,7 @@ h2 {
     margin: 8px 0;
 }
 
-/* Buttons */
+
 button {
     padding: 10px 20px;
     border-radius: 8px;
@@ -103,7 +103,7 @@ body.dark #decrease-text {
     background-color: #16a34a;
 }
 
-/* Inputs */
+
 input[type="range"], select {
     width: 100%;
     padding: 6px;
@@ -119,12 +119,12 @@ body.dark select {
     color: #f1f1f1;
 }
 
-/* Checkbox & Radio */
+
 input[type="checkbox"] {
     margin-right: 8px;
 }
 
-/* High Contrast Mode */
+
 body.high-contrast {
     background-color: black;
     color: yellow;
@@ -133,18 +133,18 @@ body.high-contrast {
 body.high-contrast a { color: cyan; }
 body.high-contrast button { background-color: yellow; color: black; }
 
-/* Reduce Motion */
+
 body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
     transition: none !important;
     animation: none !important;
 }
 
-/* Focus Outline for Accessibility */
+
 button:focus, input:focus, select:focus {
     outline: 3px solid #16a34a;
     outline-offset: 2px;
 }
-/* Google Translate Frame */
+
 .translate-frame {
     max-width: 400px;
     margin: 30px auto;
@@ -163,7 +163,7 @@ button:focus, input:focus, select:focus {
     color: #333;
 }
 
-/* Dark Mode */
+
 body.dark .translate-frame {
     background-color: #1f1f1f;
     border: 1px solid #444;
@@ -174,7 +174,7 @@ body.dark .translate-frame h3 {
     color: #f1f1f1;
 }
 
-/* Google Translate Dropdown inside Frame */
+
 .translate-frame select.goog-te-combo {
     width: 100%;
     max-width: 200px;
@@ -185,7 +185,7 @@ body.dark .translate-frame h3 {
     margin-top: 10px;
 }
 
-/* Dark Mode for dropdown */
+
 body.dark .translate-frame select.goog-te-combo {
     background-color: #2a2a2a !important;
     color: #f1f1f1 !important;

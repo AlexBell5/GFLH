@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents('php:
 
 $username = trim($data['username'] ?? '');
 $email    = trim($data['email'] ?? '');
@@ -19,7 +19,7 @@ if ($username === '' || $email === '') {
     exit();
 }
 
-// Database connection
+
 $host = 'localhost';
 $db = 'GFLH';
 $dbuser = 'root';
@@ -31,7 +31,7 @@ if ($conn->connect_error) {
     exit();
 }
 
-// Check if email is already taken by another user
+
 $checkEmail = $conn->prepare("SELECT user_id FROM users WHERE email = ? AND user_id != ?");
 $checkEmail->bind_param("si", $email, $userId);
 $checkEmail->execute();
@@ -43,20 +43,20 @@ if ($checkEmail->get_result()->num_rows > 0) {
 }
 $checkEmail->close();
 
-// Update profile
+
 if ($password && !empty($password)) {
-    // Update with new password
+    
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     $stmt = $conn->prepare("UPDATE users SET username=?, email=?, password_hash=? WHERE user_id=?");
     $stmt->bind_param("sssi", $username, $email, $passwordHash, $userId);
 } else {
-    // Update without password
+    
     $stmt = $conn->prepare("UPDATE users SET username=?, email=? WHERE user_id=?");
     $stmt->bind_param("ssi", $username, $email, $userId);
 }
 
 if ($stmt->execute()) {
-    // Update session variables
+    
     $_SESSION['username'] = $username;
     echo json_encode(['success' => true]);
 } else {
@@ -65,3 +65,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+

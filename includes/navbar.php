@@ -66,12 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (openBtn) {
         openBtn.addEventListener('click', async () => {
             cart.style.right = "0";
-            await refreshCartSidebar(); // load cart on open
+            await refreshCartSidebar(); 
         });
     }
     if (closeBtn) closeBtn.onclick = () => cart.style.right = "-400px";
 
-    // Function to refresh cart sidebar
+    
     async function refreshCartSidebar() {
         const itemsDiv = cart.querySelector('.cart-items');
         try {
@@ -83,9 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Expose globally so other scripts can call it after adding to cart
+    
     window.refreshCartSidebar = refreshCartSidebar;
 });
 </script>
 
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript" src="

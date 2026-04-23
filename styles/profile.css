@@ -1,8 +1,6 @@
-/* =========================
-   PROFILE PAGE STYLES
-   ========================= */
 
-/* GENERAL STYLES */
+
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -16,7 +14,7 @@ main {
     padding: 0 20px;
 }
 
-/* HEADINGS */
+
 h1, h2, h3 {
     margin-top: 0;
     margin-bottom: 15px;
@@ -42,7 +40,7 @@ h3 {
     font-weight: 600;
 }
 
-/* SECTIONS */
+
 section {
     margin-bottom: 40px;
     background: #fff;
@@ -51,13 +49,13 @@ section {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* ACCOUNT INFO */
+
 section p {
     margin: 8px 0;
     font-size: 1em;
 }
 
-/* BUTTONS */
+
 button, .btn {
     cursor: pointer;
     padding: 10px 16px;
@@ -71,7 +69,7 @@ button:hover, .btn:hover {
     opacity: 0.9;
 }
 
-/* EDIT PROFILE FORM */
+
 #editProfileForm {
     display: flex;
     flex-direction: column;
@@ -103,7 +101,7 @@ button:hover, .btn:hover {
     border-color: #007bff;
 }
 
-/* LINKS */
+
 a {
     color: #007bff;
     text-decoration: none;
@@ -114,7 +112,7 @@ a:hover {
     color: #0056b3;
 }
 
-/* SALES DASHBOARD CARDS */
+
 .sales-card {
     background: #f8f9fa;
     padding: 20px;
@@ -132,7 +130,7 @@ a:hover {
     margin: 0;
 }
 
-/* TABLES */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -156,7 +154,7 @@ tbody tr:hover {
     background-color: #f1f3f5;
 }
 
-/* RESPONSIVE TABLES */
+
 @media (max-width: 768px) {
     table, thead, tbody, th, td, tr {
         display: block;
@@ -194,12 +192,12 @@ tbody tr:hover {
     td:nth-of-type(5)::before { content: "Amount"; }
 }
 
-/* MESSAGE ALERTS */
+
 #updateMessage {
     font-weight: 500;
 }
 
-/* SPECIAL STYLES */
+
 .add-product-btn {
     display: inline-block;
     background: #16a34a;
@@ -214,32 +212,30 @@ tbody tr:hover {
     background: #15803d;
 }
 
-/* UTILITY CLASSES */
+
 .text-center {
     text-align: center;
 }
-/* =========================
-   DARK MODE PROFILE PAGE
-   ========================= */
+
 
 body.dark {
     background-color: #121212;
     color: #f1f1f1;
 }
 
-/* MAIN CONTENT */
+
 body.dark main {
     background-color: #121212;
 }
 
-/* SECTIONS */
+
 body.dark section {
     background-color: #1f1f1f;
     color: #f1f1f1;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* HEADINGS */
+
 body.dark h1,
 body.dark h2,
 body.dark h3 {
@@ -247,7 +243,7 @@ body.dark h3 {
     border-color: #333;
 }
 
-/* PARAGRAPHS AND TEXT */
+
 body.dark p,
 body.dark td,
 body.dark th,
@@ -255,12 +251,12 @@ body.dark a {
     color: #e0e0e0;
 }
 
-/* LINKS */
+
 body.dark a:hover {
     color: #16a34a;
 }
 
-/* INPUTS AND FORM ELEMENTS */
+
 body.dark input[type="text"],
 body.dark input[type="email"],
 body.dark input[type="password"],
@@ -278,7 +274,7 @@ body.dark select:focus {
     box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.3);
 }
 
-/* TABLES */
+
 body.dark table {
     background-color: #1f1f1f;
     box-shadow: 0 2px 10px rgba(0,0,0,0.6);
@@ -299,7 +295,7 @@ body.dark tbody tr:hover {
     background-color: #2a2a2a;
 }
 
-/* SALES DASHBOARD CARDS */
+
 body.dark .sales-card {
     background-color: #1f1f1f;
     color: #f1f1f1;
@@ -317,7 +313,7 @@ body.dark .sales-card p {
     color: #e0e0e0;
 }
 
-/* BUTTONS */
+
 body.dark button,
 body.dark .btn,
 body.dark .add-product-btn {
@@ -333,7 +329,7 @@ body.dark .add-product-btn:hover {
     color: #fff;
 }
 
-/* SPECIAL BUTTONS */
+
 body.dark .add-product-btn {
     background-color: #16a34a;
     color: #fff;
@@ -343,12 +339,12 @@ body.dark .add-product-btn:hover {
     background-color: #138032;
 }
 
-/* ALERTS / MESSAGES */
+
 body.dark #updateMessage {
     color: #e0e0e0;
 }
 
-/* UTILITY CLASSES */
+
 body.dark .text-center {
     color: #f1f1f1;
 }

@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-// Database connection
+
 $host = 'localhost';
 $db = 'GFLH';
 $dbuser = 'root';
@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Sorting logic
+
 $order = "p.created_at DESC";
 
 if (isset($_GET['sort'])) {
@@ -24,7 +24,7 @@ if (isset($_GET['sort'])) {
     }
 }
 
-// Fetch products
+
 $query = "
     SELECT 
         p.product_id,
@@ -67,7 +67,7 @@ $conn->close();
 <script src="../scripts/settings.js"></script>
 <main>
   <?php if (isset($_GET['error'])): ?>
-    <div style="background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 6px; margin: 20px auto; max-width: 1000px; border: 1px solid #fecaca;">
+    <div style="background: 
       <?php if ($_GET['error'] === 'own_product'): ?>
         <strong>Error:</strong> This is your own product.
       <?php elseif ($_GET['error'] === 'product_not_found'): ?>
@@ -219,7 +219,7 @@ document.getElementById("searchInput").addEventListener("keyup", function () {
   });
 });
 
-// SORT SCRIPT
+
 function handleSortChange(value) {
   if (value === "") return;
   window.location.href = "?sort=" + value;
@@ -239,11 +239,11 @@ document.querySelectorAll('.cart-form').forEach(form => {
             msgSpan.style.color='green';
             msgSpan.textContent=data.message;
 
-            // Update navbar count
+            
             const cartCountElem = document.getElementById('cartCount');
             if(cartCountElem) cartCountElem.textContent = data.cart_count;
 
-            // Update sidebar
+            
             if(window.refreshCartSidebar) window.refreshCartSidebar();
 
         } else {

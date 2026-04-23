@@ -46,7 +46,7 @@ try {
         $stmt->execute([$customer_id,$product_id,$quantity,$total_price]);
     }
 
-    // Updated cart count
+    
     $stmt = $pdo->prepare("SELECT SUM(quantity) as cart_count FROM orders WHERE customer_id=? AND order_status='basket'");
     $stmt->execute([$customer_id]);
     $cart_count = (int)$stmt->fetchColumn();

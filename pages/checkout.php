@@ -44,7 +44,7 @@
         $pdo = new PDO("mysql:host=localhost;dbname=GFLH", "root", "");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Get all basket items
+        
         $stmt = $pdo->prepare("
             SELECT 
               o.order_id,
@@ -116,3 +116,4 @@
 
 </body>
 </html>
+

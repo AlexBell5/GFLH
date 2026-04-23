@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-// Database connection (not used in this snippet but ready)
+
 $host = 'localhost';
 $db = 'GFLH';
 $dbuser = 'root';

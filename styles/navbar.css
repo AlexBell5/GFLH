@@ -1,4 +1,5 @@
-/* Navbar Styling */
+
+/* Navbar */
 .navbar {
     background-color: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -17,7 +18,7 @@
     height: 70px;
 }
 
-/* Logo Section */
+
 .navbar-logo {
     display: flex;
     align-items: center;
@@ -52,7 +53,7 @@
     line-height: 1;
 }
 
-/* Navigation Links */
+
 .navbar-links {
     display: flex;
     gap: 30px;
@@ -88,7 +89,7 @@
     width: 100%;
 }
 
-/* Right Section */
+
 .navbar-right {
     display: flex;
     align-items: center;
@@ -96,7 +97,7 @@
     flex-shrink: 0;
 }
 
-/* Navbar Icons */
+
 .navbar-icon {
     display: flex;
     align-items: center;
@@ -115,7 +116,7 @@
     color: #16a34a;
 }
 
-/* Login Button */
+
 .btn-login {
     background-color: #16a34a;
     color: #ffffff;
@@ -141,7 +142,7 @@
     transform: translateY(0);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .navbar-container {
         padding: 0 15px;
@@ -218,6 +219,7 @@
         font-size: 12px;
     }
 }
+/* Cart Sidebar */
 .cart-sidebar {
   position: fixed;
   top: 0;
@@ -268,9 +270,10 @@
 .checkout-btn:hover {
   background: #15803d;
 }
-/* === Dark Mode Navbar & Cart Sidebar === */
 
-/* Navbar */
+
+
+/* Dark Mode */
 body.dark .navbar {
     background-color: #1f1f1f;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -321,7 +324,7 @@ body.dark .btn-login:active {
     transform: translateY(0);
 }
 
-/* Cart Sidebar */
+
 body.dark .cart-sidebar {
     background-color: #1f1f1f;
     color: #f1f1f1;
@@ -349,7 +352,7 @@ body.dark .checkout-btn:hover {
     color: #ffffff;
 }
 
-/* Smooth transitions for toggle */
+
 body.dark .navbar,
 body.dark .nav-link,
 body.dark .navbar-icon,
@@ -366,12 +369,12 @@ body.dark .settings-option {
     background-color: #1f1f1f;
     color: #f1f1f1;
 }
-/* Move slider when dark mode is active */
+
 body.dark .toggle-slider {
     left: 26px;
 }
 
-/* Optional: change background when active */
+
 body.dark .toggle-switch {
     background-color: #4caf50;
 }
@@ -385,7 +388,7 @@ body.dark .toggle-switch {
     cursor: pointer;
 }
 
-/* Slider inside toggle */
+
 .toggle-slider {
     width: 24px;
     height: 24px;
@@ -396,4 +399,5 @@ body.dark .toggle-switch {
     left: 0px;
     transition: left 0.2s;
 }
+
 

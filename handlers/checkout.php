@@ -1,4 +1,8 @@
 <?php
+/*
+ * Process checkout and complete orders
+ * Updates order status from basket to completed and decrements product stock quantities
+ */
 session_start();
 
 if (!isset($_SESSION['user_id'])) {

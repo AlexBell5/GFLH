@@ -1,4 +1,8 @@
 <?php
+/*
+ * Main homepage and database initialization
+ * Sets up database structure, displays featured products, farmer count, and statistics
+ */
 session_start();
 $host = "localhost";
 $user = "root";
@@ -28,10 +32,21 @@ try {
             email VARCHAR(100) NOT NULL UNIQUE,
             password_hash VARCHAR(255) NOT NULL,
             role ENUM('customer', 'farmer') NOT NULL,
+            address VARCHAR(255) DEFAULT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     ");
+
+    // Add address column if it doesn't exist (for existing databases)
+    try {
+        $pdo->exec("ALTER TABLE users ADD COLUMN address VARCHAR(255) DEFAULT NULL");
+    } catch (PDOException $e) {
+        // Column might already exist, ignore error
+    }
+
+    // Add address column if it doesn't exist (for existing databases)
+    $pdo->exec("ALTER TABLE users ADD COLUMN IF NOT EXISTS address VARCHAR(255) DEFAULT NULL");
 
     
     $pdo->exec("

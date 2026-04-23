@@ -1,4 +1,8 @@
 <?php
+/*
+ * Farmer product management interface
+ * Displays table of farmer's products with editing and deletion capabilities
+ */
 session_start();
 
 

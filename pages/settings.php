@@ -1,4 +1,8 @@
 <?php 
+/*
+ * Accessibility and preferences settings page
+ * Provides screen reader, voice selection, speed control, and translation options
+ */
 session_start();
 
 
@@ -36,7 +40,6 @@ if ($conn->connect_error) {
     </label>
     Translator:
     <div id="google_translate_element"></div>
-</div>
 </div>
 
 

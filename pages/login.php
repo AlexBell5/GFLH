@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+/*
+ * User login form page
+ * Displays login interface with email/password fields and links to signup
+ */
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>

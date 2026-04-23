@@ -1,7 +1,22 @@
 <?php
+/*
+ * Reusable navigation bar component
+ * Displays site navigation, logo, cart toggle, user menu, dark mode toggle, and cart sidebar
+ */
 if (session_status() == PHP_SESSION_NONE) session_start();
 $is_logged_in = isset($_SESSION['user_id']);
 ?>
+<script>
+    (function() {
+        try {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark');
+            }
+        } catch (error) {
+            // silent fallback if localStorage access is blocked
+        }
+    })();
+</script>
 
 <nav class="navbar">
     <div class="navbar-container">
@@ -88,4 +103,4 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-<script type="text/javascript" src="
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

@@ -1,4 +1,8 @@
 <?php
+/*
+ * User profile page with role-specific content
+ * Shows account info, farmer products/dashboard or customer order information
+ */
 session_start();
 
 
@@ -162,20 +166,20 @@ $stmt->close();
         <!-- Sales Summary -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
           <div>
-            <h3 style="margin: 0 0 10px 0; color: 
-            <p style="font-size: 24px; font-weight: bold; margin: 0; color: 
+            <h3 style="margin: 0 0 10px 0; color: #333;">Total Sales</h3>
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #16a34a;">
               £<?php echo number_format($sales_stats['total_sales'] ?? 0, 2); ?>
             </p>
           </div>
           <div>
-            <h3 style="margin: 0 0 10px 0; color: 
-            <p style="font-size: 24px; font-weight: bold; margin: 0; color: 
+            <h3 style="margin: 0 0 10px 0; color: #333;">Total Orders</h3>
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #16a34a;">
               <?php echo $sales_stats['total_orders'] ?? 0; ?>
             </p>
           </div>
           <div>
-            <h3 style="margin: 0 0 10px 0; color: 
-            <p style="font-size: 24px; font-weight: bold; margin: 0; color: 
+            <h3 style="margin: 0 0 10px 0; color: #333;">Total Customers</h3>
+            <p style="font-size: 24px; font-weight: bold; margin: 0; color: #16a34a;">
               <?php echo $sales_stats['total_customers'] ?? 0; ?>
             </p>
           </div>
@@ -187,22 +191,22 @@ $stmt->close();
           <h3>Top Customers</h3>
           <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-              <thead style="background: 
+              <thead style="background: #f9fafb;">
                 <tr>
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
-                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid 
-                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid 
-                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid 
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Customer</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Email</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">Orders</th>
+                  <th style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">Total Spent</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Last Order</th>
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($customer_sales as $customer): ?>
-                <tr style="border-bottom: 1px solid 
+                <tr style="border-bottom: 1px solid #e5e7eb;">
                   <td style="padding: 12px;"><?php echo htmlspecialchars($customer['customer_name']); ?></td>
                   <td style="padding: 12px;"><?php echo htmlspecialchars($customer['customer_email']); ?></td>
                   <td style="padding: 12px; text-align: right;"><?php echo $customer['orders_count']; ?></td>
-                  <td style="padding: 12px; text-align: right; font-weight: bold; color: 
+                  <td style="padding: 12px; text-align: right; font-weight: bold; color: #16a34a;">
                     £<?php echo number_format($customer['total_spent'], 2); ?>
                   </td>
                   <td style="padding: 12px;"><?php echo date('M d, Y', strtotime($customer['last_order_date'])); ?></td>
@@ -246,14 +250,14 @@ $stmt->close();
           </div>
         </div>
         <?php else: ?>
-        <div style="text-align: center; padding: 40px; background: 
-          <h3 style="color: 
-          <p style="color: 
-          <a href="/GFLH/handlers/add-product.php" style="display: inline-block; background: 
+        <div style="text-align: center; padding: 40px; background: #f9f9f9; border-radius: 8px;">
+          <h3 style="color: #333; margin-bottom: 10px;">No Sales Yet</h3>
+          <p style="color: #666; margin-bottom: 20px;">Start by adding your first product to begin selling.</p>
+          <a href="/GFLH/handlers/add-product.php" style="display: inline-block; background: #16a34a; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Add Your First Product</a>
         </div>
         <?php endif; ?>
-      </section>
-<?php endif; ?>
+    <?php endif; ?>
+    <?php if ($role === 'customer'): ?>
       <section>
         <h2>Your Orders</h2>
         <p>
@@ -261,6 +265,7 @@ $stmt->close();
           <a href="products.php">Browse Products</a>
         </p>
       </section>
+    <?php endif; ?>
 
 
 

@@ -141,6 +141,27 @@ body.dark .auth-form input[type="password"] {
 }
 
 
+.form-options {
+    margin-bottom: 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    gap: 8px;
+}
+
+.remember-me a {
+    color: #16a34a;
+    text-decoration: none;
+}
+
+body.dark .remember-me a {
+    color: #66aaff;
+}
+
+
 .auth-button {
     width: 100%;
     padding: 12px;

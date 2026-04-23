@@ -1,3 +1,7 @@
+<!--
+ * Producers showcase page
+ * Displays static cards of local producers with descriptions, methods, and benefits
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>

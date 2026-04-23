@@ -1,4 +1,8 @@
 <?php
+/*
+ * Payment entry form page
+ * Collects card number, expiry, and CVV with validation for checkout completion
+ */
 session_start();
 
 if (!isset($_SESSION['user_id'])) {

@@ -1,4 +1,8 @@
 <?php
+/*
+ * Handler for updating product price and stock
+ * Validates farmer authorization and updates product attributes
+ */
 session_start();
 
 

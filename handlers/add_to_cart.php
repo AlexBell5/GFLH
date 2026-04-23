@@ -1,4 +1,8 @@
 <?php
+/*
+ * AJAX handler for adding products to shopping cart
+ * Validates stock availability, prevents farmers from buying own products, updates cart quantity
+ */
 session_start();
 header('Content-Type: application/json');
 

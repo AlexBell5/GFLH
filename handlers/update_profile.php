@@ -1,4 +1,8 @@
 <?php
+/*
+ * Handler for updating user profile information
+ * Updates username, email, and optionally password with JSON response for AJAX requests
+ */
 session_start();
 header('Content-Type: application/json');
 

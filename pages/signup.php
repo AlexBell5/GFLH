@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+/*
+ * User registration form page
+ * Displays signup form with username, email, password, and customer/farmer role selection
+ */
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,7 +107,7 @@
       <div class="form-options">
         <label class="remember-me">
           <input type="checkbox" required />
-          I agree to the <a href="
+          I agree to the <a href="#">Terms of Service</a>
         </label>
       </div>
 

@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+/*
+ * Order review and checkout page
+ * Shows basket items, order summary, totals, and checkout form before payment
+ */
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

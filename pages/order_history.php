@@ -1,4 +1,8 @@
 <?php
+/*
+ * Customer order history and tracking page
+ * Groups and displays past orders with status, items, farmer names, and totals
+ */
 session_start();
 
 
@@ -15,7 +19,6 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $stmt = $pdo->prepare("
     SELECT 
-      o.order_id,
       o.order_id,
       o.order_date,
       o.total_price,

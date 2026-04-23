@@ -1,4 +1,8 @@
 <?php
+/*
+ * Form page for farmers to add new products
+ * Displays input fields for product details, image, price, stock, and delivery address
+ */
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'farmer') {
@@ -15,14 +19,6 @@ if ($conn->connect_error) {
 
 
 $address = '';
-$stmt = $conn->prepare("SELECT address FROM users WHERE user_id = ?");
-$stmt->bind_param("i", $_SESSION['user_id']);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($row = $result->fetch_assoc()) {
-    $address = $row['address'];
-}
 ?>
 <!DOCTYPE html>
 <html>

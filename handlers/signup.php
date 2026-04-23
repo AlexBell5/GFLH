@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * Process new user registration
+ * Validates input, checks email uniqueness, hashes password, creates user account as customer or farmer
+ */
 session_start();
 
 $host = 'localhost';

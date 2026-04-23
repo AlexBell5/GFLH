@@ -9,12 +9,19 @@ if (!window.SimpleScreenReader) {
             this.currentVoice = null;
             this.synth = window.speechSynthesis;
 
-            document.addEventListener('DOMContentLoaded', () => {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    this.loadVoices();
+                    this.setupControls();
+                    this.updateUIFromSettings();
+                    this.initDarkModeToggle();
+                });
+            } else {
                 this.loadVoices();
                 this.setupControls();
                 this.updateUIFromSettings();
                 this.initDarkModeToggle();
-            });
+            }
 
             if (speechSynthesis.onvoiceschanged !== undefined) {
                 speechSynthesis.onvoiceschanged = () => this.loadVoices();
@@ -101,7 +108,11 @@ if (!window.SimpleScreenReader) {
             if (!button) return;
 
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') document.body.classList.add('dark');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+            } else {
+                document.body.classList.remove('dark');
+            }
 
             button.addEventListener('click', () => {
                 document.body.classList.toggle('dark');
@@ -116,5 +127,7 @@ if (!window.SimpleScreenReader) {
 }
 
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  if (document.getElementById('google_translate_element')) {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
 }

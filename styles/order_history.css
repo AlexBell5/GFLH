@@ -49,6 +49,9 @@ main {
 
     .order-info {
       flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .order-id {
@@ -198,6 +201,57 @@ body.dark {
 
 body.dark .history-header {
   border-bottom: 2px solid #16a34a;
+}
+
+body.dark .order-card {
+  background: #1f1f1f;
+  border: 1px solid #444;
+}
+
+body.dark .order-header {
+  background: #2a2a2a;
+  border-bottom: 1px solid #444;
+}
+
+body.dark .order-id {
+  color: #ccc;
+}
+
+body.dark .order-date {
+  color: #999;
+}
+
+body.dark .order-body {
+  color: #f1f1f1;
+}
+
+body.dark .item-name {
+  color: #f1f1f1;
+}
+
+body.dark .item-farmer {
+  color: #ccc;
+}
+
+body.dark .item-quantity {
+  color: #999;
+}
+
+body.dark .order-footer {
+  background: #2a2a2a;
+  border-top: 1px solid #444;
+}
+
+body.dark .total-label {
+  color: #ccc;
+}
+
+body.dark .empty-state {
+  color: #ccc;
+}
+
+body.dark .empty-state h2 {
+  color: #f1f1f1;
 }
 
 body.dark .history-header h1 {

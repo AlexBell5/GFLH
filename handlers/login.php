@@ -1,4 +1,8 @@
 <?php
+/*
+ * Handle user login authentication
+ * Verifies email and password, establishes session with user credentials
+ */
 session_start();
 
 $host = 'localhost';

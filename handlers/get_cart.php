@@ -1,4 +1,8 @@
 <?php
+/*
+ * Retrieve and display cart contents
+ * Fetches basket items for logged-in user and calculates running total
+ */
 session_start();
 
 if (!isset($_SESSION['user_id'])) {

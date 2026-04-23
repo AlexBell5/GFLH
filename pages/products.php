@@ -1,4 +1,8 @@
 <?php 
+/*
+ * Products listing and browsing page
+ * Displays all available products with search, sorting, and add-to-cart functionality
+ */
 session_start();
 
 

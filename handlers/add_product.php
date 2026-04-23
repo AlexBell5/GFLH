@@ -1,4 +1,8 @@
 <?php
+/*
+ * Handler for adding new products as a farmer
+ * Validates input, processes image uploads, and inserts product with delivery/pickup options
+ */
 session_start();
 
 
